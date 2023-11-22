@@ -75,10 +75,11 @@ export function collides(l1: LayoutItem, l2: LayoutItem): boolean {
  * @param  {Array} layout Layout.
  * @param  {Boolean} verticalCompact Whether or not to compact the layout
  *   vertically.
+ * @param cover 是否能够网格覆盖
  * @param {Object} minPositions
- * @return {Array}       Compacted Layout.
+ * @return {Array}   Compacted Layout.
  */
-export function compact(layout: Layout, verticalCompact: Boolean, minPositions): Layout {
+export function compact(layout: Layout, verticalCompact: Boolean,cover:Boolean, minPositions): Layout {
     // Statics go in the compareWith array right away so items flow around them.
   const compareWith = getStatics(layout);
   // We go through the items by row and column.
@@ -91,7 +92,7 @@ export function compact(layout: Layout, verticalCompact: Boolean, minPositions):
 
     // Don't move static elements
     if (!l.static) {
-      l = compactItem(compareWith, l, verticalCompact, minPositions);
+        l = !!cover ? l : compactItem(compareWith, l, verticalCompact, minPositions);
 
       // Add to comparison array. We only collide with items before this one.
       // Statics are already in this array.
@@ -211,8 +212,10 @@ export function getStatics(layout: Layout): Array<LayoutItem> {
  * @param  {Number}     [y]    Y position in grid units.
  * @param  {Boolean}    [isUserAction] If true, designates that the item we're moving is
  *                                     being dragged/resized by th euser.
+ * @param cover 是否可拖拽到已存在网格区域
+ * @param preventCollision
  */
-export function moveElement(layout: Layout, l: LayoutItem, x: Number, y: Number, isUserAction: Boolean, preventCollision: Boolean): Layout {
+export function moveElement(layout: Layout, l: LayoutItem, x: Number, y: Number, isUserAction: Boolean, cover:Boolean,preventCollision: Boolean,): Layout {
   if (l.static) return layout;
 
   // Short-circuit if nothing to do.
@@ -243,7 +246,8 @@ export function moveElement(layout: Layout, l: LayoutItem, x: Number, y: Number,
   }
 
   // Move each item that collides away from this element.
-  for (let i = 0, len = collisions.length; i < len; i++) {
+  if (!cover){
+    for (let i = 0, len = collisions.length; i < len; i++) {
     const collision = collisions[i];
     // console.log('resolving collision between', l.i, 'at', l.y, 'and', collision.i, 'at', collision.y);
 
@@ -260,7 +264,7 @@ export function moveElement(layout: Layout, l: LayoutItem, x: Number, y: Number,
       layout = moveElementAwayFromCollision(layout, l, collision, isUserAction);
     }
   }
-
+ }
   return layout;
 }
 

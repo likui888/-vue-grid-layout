@@ -39,6 +39,10 @@
             GridItem,
         },
         props: {
+          allowCover: {
+            type: Boolean,
+            default: true
+          },
             // If true, the container height swells and contracts to fit contents
             autoSize: {
                 type: Boolean,
@@ -190,7 +194,7 @@
                     //self.width = self.$el.offsetWidth;
                     addWindowEventListener('resize', self.onWindowResize);
 
-                    compact(self.layout, self.verticalCompact);
+                    compact(self.layout, self.verticalCompact,this.allowCover);
 
                     self.$emit('layout-updated',self.layout)
 
@@ -301,7 +305,7 @@
                         this.initResponsiveFeatures();
                     }
 
-                    compact(this.layout, this.verticalCompact);
+                    compact(this.layout, this.verticalCompact,this.allowCover);
                     this.eventBus.$emit("updateWidth", this.width);
                     this.updateHeight();
 
@@ -358,17 +362,17 @@
                     });
                 }
 
-                // Move the element to the dragged location.
-                this.layout = moveElement(this.layout, l, x, y, true, this.preventCollision);
+                // Move the element to the dragged location if don`t allow layout cover .
+               this.layout = moveElement(this.layout, l, x, y, true,this.allowCover, this.preventCollision);
 
                 if (this.restoreOnDrag) {
                     // Do not compact items more than in layout before drag
                     // Set moved item as static to avoid to compact it
                     l.static = true;
-                    compact(this.layout, this.verticalCompact, this.positionsBeforeDrag);
+                  compact(this.layout, this.verticalCompact,this.allowCover, this.positionsBeforeDrag);
                     l.static = false;
                 } else {
-                    compact(this.layout, this.verticalCompact);
+                  compact(this.layout, this.verticalCompact,this.allowCover);
                 }
 
                 // needed because vue can't detect changes on array element properties
@@ -434,7 +438,7 @@
 
                 if (this.responsive) this.responsiveGridLayout();
 
-                compact(this.layout, this.verticalCompact);
+                compact(this.layout, this.verticalCompact,this.allowCover);
                 this.eventBus.$emit("compact");
                 this.updateHeight();
 
