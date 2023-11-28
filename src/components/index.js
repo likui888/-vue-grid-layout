@@ -2,7 +2,7 @@ import GridItem from './GridItem.vue';
 import GridLayout from './GridLayout.vue';
 // import ResponsiveGridLayout from './ResponsiveGridLayout.vue';
 
-const VueGridLayout = {
+const VueGridLayoutSa = {
     // ResponsiveGridLayout,
     GridLayout,
     GridItem
@@ -11,8 +11,8 @@ const VueGridLayout = {
 export function install(Vue) {
     if (install.installed) return;
     install.installed = true;
-    Object.keys(VueGridLayout).forEach(name => {
-        Vue.component(name, VueGridLayout[name]);
+    Object.keys(VueGridLayoutSa).forEach(name => {
+        Vue.component(name, VueGridLayoutSa[name]);
     });
 }
 
@@ -30,5 +30,5 @@ if (GlobalVue) {
     GlobalVue.use(plugin);
 }
 
-export default VueGridLayout;
+export default VueGridLayoutSa;
 export { GridLayout, GridItem };

@@ -1,15 +1,6 @@
-/*! vue-grid-layout - 2.4.0 | (c) 2015, 2022  Gustavo Santos (JBay Solutions) <gustavo.santos@jbaysolutions.com> (http://www.jbaysolutions.com) | https://github.com/jbaysolutions/vue-grid-layout */
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("vue"));
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["VueGridLayout"] = factory(require("vue"));
-	else
-		root["VueGridLayout"] = factory(root["Vue"]);
-})((typeof self !== 'undefined' ? self : this), function(__WEBPACK_EXTERNAL_MODULE__8bbf__) {
-return /******/ (function(modules) { // webpackBootstrap
+/*! vue-grid-layout-sa - 1.0.0 | (c) 2015, 2023  Gustavo Santos (JBay Solutions) <gustavo.santos@jbaysolutions.com> (http://www.jbaysolutions.com) | https://github.com/jbaysolutions/vue-grid-layout */
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -96,6 +87,260 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "014b":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// ECMAScript 6 symbols shim
+var global = __webpack_require__("e53d");
+var has = __webpack_require__("07e3");
+var DESCRIPTORS = __webpack_require__("8e60");
+var $export = __webpack_require__("63b6");
+var redefine = __webpack_require__("9138");
+var META = __webpack_require__("ebfd").KEY;
+var $fails = __webpack_require__("294c");
+var shared = __webpack_require__("dbdb");
+var setToStringTag = __webpack_require__("45f2");
+var uid = __webpack_require__("62a0");
+var wks = __webpack_require__("5168");
+var wksExt = __webpack_require__("ccb9");
+var wksDefine = __webpack_require__("6718");
+var enumKeys = __webpack_require__("47ee");
+var isArray = __webpack_require__("9003");
+var anObject = __webpack_require__("e4ae");
+var isObject = __webpack_require__("f772");
+var toObject = __webpack_require__("241e");
+var toIObject = __webpack_require__("36c3");
+var toPrimitive = __webpack_require__("1bc3");
+var createDesc = __webpack_require__("aebd");
+var _create = __webpack_require__("a159");
+var gOPNExt = __webpack_require__("0395");
+var $GOPD = __webpack_require__("bf0b");
+var $GOPS = __webpack_require__("9aa9");
+var $DP = __webpack_require__("d9f6");
+var $keys = __webpack_require__("c3a1");
+var gOPD = $GOPD.f;
+var dP = $DP.f;
+var gOPN = gOPNExt.f;
+var $Symbol = global.Symbol;
+var $JSON = global.JSON;
+var _stringify = $JSON && $JSON.stringify;
+var PROTOTYPE = 'prototype';
+var HIDDEN = wks('_hidden');
+var TO_PRIMITIVE = wks('toPrimitive');
+var isEnum = {}.propertyIsEnumerable;
+var SymbolRegistry = shared('symbol-registry');
+var AllSymbols = shared('symbols');
+var OPSymbols = shared('op-symbols');
+var ObjectProto = Object[PROTOTYPE];
+var USE_NATIVE = typeof $Symbol == 'function' && !!$GOPS.f;
+var QObject = global.QObject;
+// Don't use setters in Qt Script, https://github.com/zloirock/core-js/issues/173
+var setter = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;
+
+// fallback for old Android, https://code.google.com/p/v8/issues/detail?id=687
+var setSymbolDesc = DESCRIPTORS && $fails(function () {
+  return _create(dP({}, 'a', {
+    get: function () { return dP(this, 'a', { value: 7 }).a; }
+  })).a != 7;
+}) ? function (it, key, D) {
+  var protoDesc = gOPD(ObjectProto, key);
+  if (protoDesc) delete ObjectProto[key];
+  dP(it, key, D);
+  if (protoDesc && it !== ObjectProto) dP(ObjectProto, key, protoDesc);
+} : dP;
+
+var wrap = function (tag) {
+  var sym = AllSymbols[tag] = _create($Symbol[PROTOTYPE]);
+  sym._k = tag;
+  return sym;
+};
+
+var isSymbol = USE_NATIVE && typeof $Symbol.iterator == 'symbol' ? function (it) {
+  return typeof it == 'symbol';
+} : function (it) {
+  return it instanceof $Symbol;
+};
+
+var $defineProperty = function defineProperty(it, key, D) {
+  if (it === ObjectProto) $defineProperty(OPSymbols, key, D);
+  anObject(it);
+  key = toPrimitive(key, true);
+  anObject(D);
+  if (has(AllSymbols, key)) {
+    if (!D.enumerable) {
+      if (!has(it, HIDDEN)) dP(it, HIDDEN, createDesc(1, {}));
+      it[HIDDEN][key] = true;
+    } else {
+      if (has(it, HIDDEN) && it[HIDDEN][key]) it[HIDDEN][key] = false;
+      D = _create(D, { enumerable: createDesc(0, false) });
+    } return setSymbolDesc(it, key, D);
+  } return dP(it, key, D);
+};
+var $defineProperties = function defineProperties(it, P) {
+  anObject(it);
+  var keys = enumKeys(P = toIObject(P));
+  var i = 0;
+  var l = keys.length;
+  var key;
+  while (l > i) $defineProperty(it, key = keys[i++], P[key]);
+  return it;
+};
+var $create = function create(it, P) {
+  return P === undefined ? _create(it) : $defineProperties(_create(it), P);
+};
+var $propertyIsEnumerable = function propertyIsEnumerable(key) {
+  var E = isEnum.call(this, key = toPrimitive(key, true));
+  if (this === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key)) return false;
+  return E || !has(this, key) || !has(AllSymbols, key) || has(this, HIDDEN) && this[HIDDEN][key] ? E : true;
+};
+var $getOwnPropertyDescriptor = function getOwnPropertyDescriptor(it, key) {
+  it = toIObject(it);
+  key = toPrimitive(key, true);
+  if (it === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key)) return;
+  var D = gOPD(it, key);
+  if (D && has(AllSymbols, key) && !(has(it, HIDDEN) && it[HIDDEN][key])) D.enumerable = true;
+  return D;
+};
+var $getOwnPropertyNames = function getOwnPropertyNames(it) {
+  var names = gOPN(toIObject(it));
+  var result = [];
+  var i = 0;
+  var key;
+  while (names.length > i) {
+    if (!has(AllSymbols, key = names[i++]) && key != HIDDEN && key != META) result.push(key);
+  } return result;
+};
+var $getOwnPropertySymbols = function getOwnPropertySymbols(it) {
+  var IS_OP = it === ObjectProto;
+  var names = gOPN(IS_OP ? OPSymbols : toIObject(it));
+  var result = [];
+  var i = 0;
+  var key;
+  while (names.length > i) {
+    if (has(AllSymbols, key = names[i++]) && (IS_OP ? has(ObjectProto, key) : true)) result.push(AllSymbols[key]);
+  } return result;
+};
+
+// 19.4.1.1 Symbol([description])
+if (!USE_NATIVE) {
+  $Symbol = function Symbol() {
+    if (this instanceof $Symbol) throw TypeError('Symbol is not a constructor!');
+    var tag = uid(arguments.length > 0 ? arguments[0] : undefined);
+    var $set = function (value) {
+      if (this === ObjectProto) $set.call(OPSymbols, value);
+      if (has(this, HIDDEN) && has(this[HIDDEN], tag)) this[HIDDEN][tag] = false;
+      setSymbolDesc(this, tag, createDesc(1, value));
+    };
+    if (DESCRIPTORS && setter) setSymbolDesc(ObjectProto, tag, { configurable: true, set: $set });
+    return wrap(tag);
+  };
+  redefine($Symbol[PROTOTYPE], 'toString', function toString() {
+    return this._k;
+  });
+
+  $GOPD.f = $getOwnPropertyDescriptor;
+  $DP.f = $defineProperty;
+  __webpack_require__("6abf").f = gOPNExt.f = $getOwnPropertyNames;
+  __webpack_require__("355d").f = $propertyIsEnumerable;
+  $GOPS.f = $getOwnPropertySymbols;
+
+  if (DESCRIPTORS && !__webpack_require__("b8e3")) {
+    redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
+  }
+
+  wksExt.f = function (name) {
+    return wrap(wks(name));
+  };
+}
+
+$export($export.G + $export.W + $export.F * !USE_NATIVE, { Symbol: $Symbol });
+
+for (var es6Symbols = (
+  // 19.4.2.2, 19.4.2.3, 19.4.2.4, 19.4.2.6, 19.4.2.8, 19.4.2.9, 19.4.2.10, 19.4.2.11, 19.4.2.12, 19.4.2.13, 19.4.2.14
+  'hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables'
+).split(','), j = 0; es6Symbols.length > j;)wks(es6Symbols[j++]);
+
+for (var wellKnownSymbols = $keys(wks.store), k = 0; wellKnownSymbols.length > k;) wksDefine(wellKnownSymbols[k++]);
+
+$export($export.S + $export.F * !USE_NATIVE, 'Symbol', {
+  // 19.4.2.1 Symbol.for(key)
+  'for': function (key) {
+    return has(SymbolRegistry, key += '')
+      ? SymbolRegistry[key]
+      : SymbolRegistry[key] = $Symbol(key);
+  },
+  // 19.4.2.5 Symbol.keyFor(sym)
+  keyFor: function keyFor(sym) {
+    if (!isSymbol(sym)) throw TypeError(sym + ' is not a symbol!');
+    for (var key in SymbolRegistry) if (SymbolRegistry[key] === sym) return key;
+  },
+  useSetter: function () { setter = true; },
+  useSimple: function () { setter = false; }
+});
+
+$export($export.S + $export.F * !USE_NATIVE, 'Object', {
+  // 19.1.2.2 Object.create(O [, Properties])
+  create: $create,
+  // 19.1.2.4 Object.defineProperty(O, P, Attributes)
+  defineProperty: $defineProperty,
+  // 19.1.2.3 Object.defineProperties(O, Properties)
+  defineProperties: $defineProperties,
+  // 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
+  getOwnPropertyDescriptor: $getOwnPropertyDescriptor,
+  // 19.1.2.7 Object.getOwnPropertyNames(O)
+  getOwnPropertyNames: $getOwnPropertyNames,
+  // 19.1.2.8 Object.getOwnPropertySymbols(O)
+  getOwnPropertySymbols: $getOwnPropertySymbols
+});
+
+// Chrome 38 and 39 `Object.getOwnPropertySymbols` fails on primitives
+// https://bugs.chromium.org/p/v8/issues/detail?id=3443
+var FAILS_ON_PRIMITIVES = $fails(function () { $GOPS.f(1); });
+
+$export($export.S + $export.F * FAILS_ON_PRIMITIVES, 'Object', {
+  getOwnPropertySymbols: function getOwnPropertySymbols(it) {
+    return $GOPS.f(toObject(it));
+  }
+});
+
+// 24.3.2 JSON.stringify(value [, replacer [, space]])
+$JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function () {
+  var S = $Symbol();
+  // MS Edge converts symbol values to JSON as {}
+  // WebKit converts symbol values to JSON as null
+  // V8 throws on boxed symbols
+  return _stringify([S]) != '[null]' || _stringify({ a: S }) != '{}' || _stringify(Object(S)) != '{}';
+})), 'JSON', {
+  stringify: function stringify(it) {
+    var args = [it];
+    var i = 1;
+    var replacer, $replacer;
+    while (arguments.length > i) args.push(arguments[i++]);
+    $replacer = replacer = args[1];
+    if (!isObject(replacer) && it === undefined || isSymbol(it)) return; // IE8 returns string on undefined
+    if (!isArray(replacer)) replacer = function (key, value) {
+      if (typeof $replacer == 'function') value = $replacer.call(this, key, value);
+      if (!isSymbol(value)) return value;
+    };
+    args[1] = replacer;
+    return _stringify.apply($JSON, args);
+  }
+});
+
+// 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
+$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__("35e8")($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+// 19.4.3.5 Symbol.prototype[@@toStringTag]
+setToStringTag($Symbol, 'Symbol');
+// 20.2.1.9 Math[@@toStringTag]
+setToStringTag(Math, 'Math', true);
+// 24.3.3 JSON[@@toStringTag]
+setToStringTag(global.JSON, 'JSON', true);
+
+
+/***/ }),
 
 /***/ "01f9":
 /***/ (function(module, exports, __webpack_require__) {
@@ -214,6 +459,43 @@ module.exports = function (S, index, unicode) {
 
 /***/ }),
 
+/***/ "0395":
+/***/ (function(module, exports, __webpack_require__) {
+
+// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
+var toIObject = __webpack_require__("36c3");
+var gOPN = __webpack_require__("6abf").f;
+var toString = {}.toString;
+
+var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
+  ? Object.getOwnPropertyNames(window) : [];
+
+var getWindowNames = function (it) {
+  try {
+    return gOPN(it);
+  } catch (e) {
+    return windowNames.slice();
+  }
+};
+
+module.exports.f = function getOwnPropertyNames(it) {
+  return windowNames && toString.call(it) == '[object Window]' ? getWindowNames(it) : gOPN(toIObject(it));
+};
+
+
+/***/ }),
+
+/***/ "07e3":
+/***/ (function(module, exports) {
+
+var hasOwnProperty = {}.hasOwnProperty;
+module.exports = function (it, key) {
+  return hasOwnProperty.call(it, key);
+};
+
+
+/***/ }),
+
 /***/ "0bfb":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -249,18 +531,17 @@ module.exports = Object.keys || function keys(O) {
 
 /***/ }),
 
-/***/ "1156":
+/***/ "0fc9":
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
+var toInteger = __webpack_require__("3a38");
+var max = Math.max;
+var min = Math.min;
+module.exports = function (index, length) {
+  index = toInteger(index);
+  return index < 0 ? max(index + length, 0) : min(index, length);
+};
 
-// load the styles
-var content = __webpack_require__("ad20");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("499e").default
-var update = add("c1ec597e", content, true, {"sourceMap":false,"shadowMode":false});
 
 /***/ }),
 
@@ -303,6 +584,42 @@ module.exports = __webpack_require__("9e1e") ? Object.defineProperties : functio
   while (length > i) dP.f(O, P = keys[i++], Properties[P]);
   return O;
 };
+
+
+/***/ }),
+
+/***/ "1654":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $at = __webpack_require__("71c1")(true);
+
+// 21.1.3.27 String.prototype[@@iterator]()
+__webpack_require__("30f1")(String, 'String', function (iterated) {
+  this._t = String(iterated); // target
+  this._i = 0;                // next index
+// 21.1.5.2.1 %StringIteratorPrototype%.next()
+}, function () {
+  var O = this._t;
+  var index = this._i;
+  var point;
+  if (index >= O.length) return { value: undefined, done: true };
+  point = $at(O, index);
+  this._i += point.length;
+  return { value: point, done: false };
+});
+
+
+/***/ }),
+
+/***/ "1691":
+/***/ (function(module, exports) {
+
+// IE 8- don't enum bug keys
+module.exports = (
+  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
+).split(',');
 
 
 /***/ }),
@@ -609,6 +926,25 @@ detector.isLegacyOpera = function() {
 
 /***/ }),
 
+/***/ "1bc3":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 7.1.1 ToPrimitive(input [, PreferredType])
+var isObject = __webpack_require__("f772");
+// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+// and the second argument - flag - preferred type is a string
+module.exports = function (it, S) {
+  if (!isObject(it)) return it;
+  var fn, val;
+  if (S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
+  throw TypeError("Can't convert object to primitive value");
+};
+
+
+/***/ }),
+
 /***/ "1ca7":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -617,61 +953,58 @@ detector.isLegacyOpera = function() {
 /* unused harmony export setDocumentDir */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return addWindowEventListener; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return removeWindowEventListener; });
-var currentDir
-/*: "ltr" | "rtl" | "auto"*/
-= "auto"; // let currentDir = "auto";
+var currentDir /*: "ltr" | "rtl" | "auto"*/ = "auto";
+// let currentDir = "auto";
 
 function hasDocument() {
   return typeof document !== "undefined";
 }
-
 function hasWindow() {
   return typeof window !== "undefined";
 }
-
 function getDocumentDir() {
   if (!hasDocument()) {
     return currentDir;
   }
-
   var direction = typeof document.dir !== "undefined" ? document.dir : document.getElementsByTagName("html")[0].getAttribute("dir");
   return direction;
 }
-function setDocumentDir(dir
-/*: "ltr" | "rtl" | "auto"*/
-) {
+function setDocumentDir(dir /*: "ltr" | "rtl" | "auto"*/) {
   // export function setDocumentDir(dir){
   if (!hasDocument) {
     currentDir = dir;
     return;
   }
-
   var html = document.getElementsByTagName("html")[0];
   html.setAttribute("dir", dir);
 }
-function addWindowEventListener(event
-/*:string*/
-, callback
-/*: () => mixed*/
-) {
+function addWindowEventListener(event /*:string*/, callback /*: () => mixed*/) {
   if (!hasWindow) {
     callback();
     return;
   }
-
   window.addEventListener(event, callback);
 }
-function removeWindowEventListener(event
-/*:string*/
-, callback
-/*: () => mixed*/
-) {
+function removeWindowEventListener(event /*:string*/, callback /*: () => mixed*/) {
   if (!hasWindow) {
     return;
   }
-
   window.removeEventListener(event, callback);
 }
+
+/***/ }),
+
+/***/ "1ec9":
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__("f772");
+var document = __webpack_require__("e53d").document;
+// typeof document.createElement is 'object' in old IE
+var is = isObject(document) && isObject(document.createElement);
+module.exports = function (it) {
+  return is ? document.createElement(it) : {};
+};
+
 
 /***/ }),
 
@@ -906,6 +1239,30 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "241e":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 7.1.13 ToObject(argument)
+var defined = __webpack_require__("25eb");
+module.exports = function (it) {
+  return Object(defined(it));
+};
+
+
+/***/ }),
+
+/***/ "25eb":
+/***/ (function(module, exports) {
+
+// 7.2.1 RequireObjectCoercible(argument)
+module.exports = function (it) {
+  if (it == undefined) throw TypeError("Can't call method on  " + it);
+  return it;
+};
+
+
+/***/ }),
+
 /***/ "2621":
 /***/ (function(module, exports) {
 
@@ -925,20 +1282,19 @@ exports.f = Object.getOwnPropertySymbols;
 // This module is a runtime utility for cleaner component module output and will
 // be included in the final webpack user bundle.
 
-function normalizeComponent (
+function normalizeComponent(
   scriptExports,
   render,
   staticRenderFns,
   functionalTemplate,
   injectStyles,
   scopeId,
-  moduleIdentifier, /* server only */
+  moduleIdentifier /* server only */,
   shadowMode /* vue-cli only */
 ) {
   // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
+  var options =
+    typeof scriptExports === 'function' ? scriptExports.options : scriptExports
 
   // render functions
   if (render) {
@@ -958,7 +1314,8 @@ function normalizeComponent (
   }
 
   var hook
-  if (moduleIdentifier) { // server build
+  if (moduleIdentifier) {
+    // server build
     hook = function (context) {
       // 2.3 injection
       context =
@@ -984,11 +1341,11 @@ function normalizeComponent (
   } else if (injectStyles) {
     hook = shadowMode
       ? function () {
-        injectStyles.call(
-          this,
-          (options.functional ? this.parent : this).$root.$options.shadowRoot
-        )
-      }
+          injectStyles.call(
+            this,
+            (options.functional ? this.parent : this).$root.$options.shadowRoot
+          )
+        }
       : injectStyles
   }
 
@@ -999,16 +1356,14 @@ function normalizeComponent (
       options._injectStyles = hook
       // register for functional component in vue file
       var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
+      options.render = function renderWithStyleInjection(h, context) {
         hook.call(context)
         return originalRender(h, context)
       }
     } else {
       // inject component registration as beforeCreate hook
       var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
+      options.beforeCreate = existing ? [].concat(existing, hook) : [hook]
     }
   }
 
@@ -1017,6 +1372,20 @@ function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+
+/***/ "294c":
+/***/ (function(module, exports) {
+
+module.exports = function (exec) {
+  try {
+    return !!exec();
+  } catch (e) {
+    return true;
+  }
+};
 
 
 /***/ }),
@@ -1131,7 +1500,8 @@ module.exports = Object.create || function create(O, Properties) {
 
 
 
- // import ResponsiveGridLayout from './ResponsiveGridLayout.vue';
+
+// import ResponsiveGridLayout from './ResponsiveGridLayout.vue';
 
 var VueGridLayout = {
   // ResponsiveGridLayout,
@@ -1149,17 +1519,14 @@ var plugin = {
   install: install
 };
 var GlobalVue = null;
-
 if (typeof window !== 'undefined') {
   GlobalVue = window.Vue;
 } else if (typeof global !== 'undefined') {
   GlobalVue = global.Vue;
 }
-
 if (GlobalVue) {
   GlobalVue.use(plugin);
 }
-
 /* harmony default export */ __webpack_exports__["c"] = (VueGridLayout);
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("c8ba")))
@@ -1247,6 +1614,83 @@ module.exports = function (method, arg) {
 
 /***/ }),
 
+/***/ "30f1":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var LIBRARY = __webpack_require__("b8e3");
+var $export = __webpack_require__("63b6");
+var redefine = __webpack_require__("9138");
+var hide = __webpack_require__("35e8");
+var Iterators = __webpack_require__("481b");
+var $iterCreate = __webpack_require__("8f60");
+var setToStringTag = __webpack_require__("45f2");
+var getPrototypeOf = __webpack_require__("53e2");
+var ITERATOR = __webpack_require__("5168")('iterator');
+var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
+var FF_ITERATOR = '@@iterator';
+var KEYS = 'keys';
+var VALUES = 'values';
+
+var returnThis = function () { return this; };
+
+module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED) {
+  $iterCreate(Constructor, NAME, next);
+  var getMethod = function (kind) {
+    if (!BUGGY && kind in proto) return proto[kind];
+    switch (kind) {
+      case KEYS: return function keys() { return new Constructor(this, kind); };
+      case VALUES: return function values() { return new Constructor(this, kind); };
+    } return function entries() { return new Constructor(this, kind); };
+  };
+  var TAG = NAME + ' Iterator';
+  var DEF_VALUES = DEFAULT == VALUES;
+  var VALUES_BUG = false;
+  var proto = Base.prototype;
+  var $native = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT];
+  var $default = $native || getMethod(DEFAULT);
+  var $entries = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined;
+  var $anyNative = NAME == 'Array' ? proto.entries || $native : $native;
+  var methods, key, IteratorPrototype;
+  // Fix native
+  if ($anyNative) {
+    IteratorPrototype = getPrototypeOf($anyNative.call(new Base()));
+    if (IteratorPrototype !== Object.prototype && IteratorPrototype.next) {
+      // Set @@toStringTag to native iterators
+      setToStringTag(IteratorPrototype, TAG, true);
+      // fix for some old engines
+      if (!LIBRARY && typeof IteratorPrototype[ITERATOR] != 'function') hide(IteratorPrototype, ITERATOR, returnThis);
+    }
+  }
+  // fix Array#{values, @@iterator}.name in V8 / FF
+  if (DEF_VALUES && $native && $native.name !== VALUES) {
+    VALUES_BUG = true;
+    $default = function values() { return $native.call(this); };
+  }
+  // Define iterator
+  if ((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])) {
+    hide(proto, ITERATOR, $default);
+  }
+  // Plug for library
+  Iterators[NAME] = $default;
+  Iterators[TAG] = returnThis;
+  if (DEFAULT) {
+    methods = {
+      values: DEF_VALUES ? $default : getMethod(VALUES),
+      keys: IS_SET ? $default : getMethod(KEYS),
+      entries: $entries
+    };
+    if (FORCED) for (key in methods) {
+      if (!(key in proto)) redefine(proto, key, methods[key]);
+    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
+  }
+  return methods;
+};
+
+
+/***/ }),
+
 /***/ "32e9":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1262,29 +1706,111 @@ module.exports = __webpack_require__("9e1e") ? function (object, key, value) {
 
 /***/ }),
 
+/***/ "32fc":
+/***/ (function(module, exports, __webpack_require__) {
+
+var document = __webpack_require__("e53d").document;
+module.exports = document && document.documentElement;
+
+
+/***/ }),
+
+/***/ "335c":
+/***/ (function(module, exports, __webpack_require__) {
+
+// fallback for non-array-like ES3 and non-enumerable old V8 strings
+var cof = __webpack_require__("6b4c");
+// eslint-disable-next-line no-prototype-builtins
+module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
+  return cof(it) == 'String' ? it.split('') : Object(it);
+};
+
+
+/***/ }),
+
+/***/ "355d":
+/***/ (function(module, exports) {
+
+exports.f = {}.propertyIsEnumerable;
+
+
+/***/ }),
+
+/***/ "35e8":
+/***/ (function(module, exports, __webpack_require__) {
+
+var dP = __webpack_require__("d9f6");
+var createDesc = __webpack_require__("aebd");
+module.exports = __webpack_require__("8e60") ? function (object, key, value) {
+  return dP.f(object, key, createDesc(1, value));
+} : function (object, key, value) {
+  object[key] = value;
+  return object;
+};
+
+
+/***/ }),
+
+/***/ "366e":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__("ccb9").f('toPrimitive');
+
+
+/***/ }),
+
+/***/ "36c3":
+/***/ (function(module, exports, __webpack_require__) {
+
+// to indexed object, toObject with fallback for non-array-like ES3 strings
+var IObject = __webpack_require__("335c");
+var defined = __webpack_require__("25eb");
+module.exports = function (it) {
+  return IObject(defined(it));
+};
+
+
+/***/ }),
+
 /***/ "37c8":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1705dc22-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GridLayout.vue?vue&type=template&id=361da5e4&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"item",staticClass:"vue-grid-layout",style:(_vm.mergedStyle)},[_vm._t("default"),_c('grid-item',{directives:[{name:"show",rawName:"v-show",value:(_vm.isDragging),expression:"isDragging"}],staticClass:"vue-grid-placeholder",attrs:{"x":_vm.placeholder.x,"y":_vm.placeholder.y,"w":_vm.placeholder.w,"h":_vm.placeholder.h,"i":_vm.placeholder.i}})],2)}
-var staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"38e7a346-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GridLayout.vue?vue&type=template&id=73ba11da
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    ref: "item",
+    staticClass: "vue-grid-layout",
+    style: _vm.mergedStyle
+  }, [_vm._t("default"), _c('grid-item', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.isDragging,
+      expression: "isDragging"
+    }],
+    staticClass: "vue-grid-placeholder",
+    attrs: {
+      "x": _vm.placeholder.x,
+      "y": _vm.placeholder.y,
+      "w": _vm.placeholder.w,
+      "h": _vm.placeholder.h,
+      "i": _vm.placeholder.i
+    }
+  })], 2);
+};
+var staticRenderFns = [];
 
-
-// CONCATENATED MODULE: ./src/components/GridLayout.vue?vue&type=template&id=361da5e4&
+// CONCATENATED MODULE: ./src/components/GridLayout.vue?vue&type=template&id=73ba11da
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.get-own-property-descriptors.js
 var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.iterator.js
-var es6_array_iterator = __webpack_require__("cadf");
-
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.keys.js
 var es6_object_keys = __webpack_require__("456d");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
-var es6_object_assign = __webpack_require__("f751");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.number.is-finite.js
 var es6_number_is_finite = __webpack_require__("fca0");
@@ -1292,8 +1818,8 @@ var es6_number_is_finite = __webpack_require__("fca0");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom.iterable.js
 var web_dom_iterable = __webpack_require__("ac6a");
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
-var defineProperty = __webpack_require__("ade3");
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js + 3 modules
+var defineProperty = __webpack_require__("bd86");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.number.constructor.js
 var es6_number_constructor = __webpack_require__("c5f6");
@@ -1314,48 +1840,24 @@ var GridItem = __webpack_require__("bc21");
 // EXTERNAL MODULE: ./src/helpers/DOM.js
 var DOM = __webpack_require__("1ca7");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GridLayout.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GridLayout.vue?vue&type=script&lang=js
 
 
 
 
 
 
-
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { Object(defineProperty["a" /* default */])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { Object(defineProperty["a" /* default */])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 
 var elementResizeDetectorMaker = __webpack_require__("eec4");
 
 
- //var eventBus = require('./eventBus');
+//var eventBus = require('./eventBus');
 
 
 
-/* harmony default export */ var GridLayoutvue_type_script_lang_js_ = ({
+/* harmony default export */ var GridLayoutvue_type_script_lang_js = ({
   name: "GridLayout",
   provide: function provide() {
     return {
@@ -1367,6 +1869,10 @@ var elementResizeDetectorMaker = __webpack_require__("eec4");
     GridItem: GridItem["a" /* default */]
   },
   props: {
+    allowCover: {
+      type: Boolean,
+      default: true
+    },
     // If true, the container height swells and contracts to fit contents
     autoSize: {
       type: Boolean,
@@ -1487,20 +1993,18 @@ var elementResizeDetectorMaker = __webpack_require__("eec4");
       lastBreakpoint: null,
       // store last active breakpoint
       originalLayout: null // store original Layout
-
     };
   },
   created: function created() {
-    var self = this; // Accessible refernces of functions for removing in beforeDestroy
+    var self = this;
 
+    // Accessible refernces of functions for removing in beforeDestroy
     self.resizeEventHandler = function (eventType, i, x, y, h, w) {
       self.resizeEvent(eventType, i, x, y, h, w);
     };
-
     self.dragEventHandler = function (eventType, i, x, y, h, w) {
       self.dragEvent(eventType, i, x, y, h, w);
     };
-
     self._provided.eventBus = new external_commonjs_vue_commonjs2_vue_root_Vue_default.a();
     self.eventBus = self._provided.eventBus;
     self.eventBus.$on('resizeEvent', self.resizeEventHandler);
@@ -1513,7 +2017,6 @@ var elementResizeDetectorMaker = __webpack_require__("eec4");
     this.eventBus.$off('dragEvent', this.dragEventHandler);
     this.eventBus.$destroy();
     Object(DOM["c" /* removeWindowEventListener */])("resize", this.onWindowResize);
-
     if (this.erd) {
       this.erd.uninstall(this.$refs.item);
     }
@@ -1529,10 +2032,11 @@ var elementResizeDetectorMaker = __webpack_require__("eec4");
       var self = this;
       this.$nextTick(function () {
         self.initResponsiveFeatures();
-        self.onWindowResize(); //self.width = self.$el.offsetWidth;
+        self.onWindowResize();
 
+        //self.width = self.$el.offsetWidth;
         Object(DOM["a" /* addWindowEventListener */])('resize', self.onWindowResize);
-        Object(utils["c" /* compact */])(self.layout, self.verticalCompact);
+        Object(utils["c" /* compact */])(self.layout, self.verticalCompact, this.allowCover);
         self.$emit('layout-updated', self.layout);
         self.updateHeight();
         self.$nextTick(function () {
@@ -1554,10 +2058,8 @@ var elementResizeDetectorMaker = __webpack_require__("eec4");
       var self = this;
       this.$nextTick(function () {
         var _this = this;
-
         //this.$broadcast("updateWidth", this.width);
         this.eventBus.$emit("updateWidth", this.width);
-
         if (oldval === null) {
           /*
               If oldval == null is when the width has never been
@@ -1567,21 +2069,20 @@ var elementResizeDetectorMaker = __webpack_require__("eec4");
               got set to null in the constructor. It is now time
               to issue layout-ready events as the GridItems have
               their sizes configured properly.
-                The reason for emitting the layout-ready events on
+               The reason for emitting the layout-ready events on
               the next tick is to allow for the newly-emitted
               updateWidth event (above) to have reached the
               children GridItem-s and had their effect, so we're
               sure that they have the final size before we emit
               layout-ready (for this GridLayout) and
               item-layout-ready (for the GridItem-s).
-                This way any client event handlers can reliably
+               This way any client event handlers can reliably
               invistigate stable sizes of GridItem-s.
           */
           this.$nextTick(function () {
             _this.$emit('layout-ready', self.layout);
           });
         }
-
         this.updateHeight();
       });
     },
@@ -1611,7 +2112,6 @@ var elementResizeDetectorMaker = __webpack_require__("eec4");
         this.$emit('update:layout', this.originalLayout);
         this.eventBus.$emit("setColNum", this.colNum);
       }
-
       this.onWindowResize();
     },
     maxRows: function maxRows() {
@@ -1626,8 +2126,8 @@ var elementResizeDetectorMaker = __webpack_require__("eec4");
       if (this.layout !== undefined && this.originalLayout !== null) {
         if (this.layout.length !== this.originalLayout.length) {
           // console.log("### LAYOUT UPDATE!", this.layout.length, this.originalLayout.length);
-          var diff = this.findDifference(this.layout, this.originalLayout);
 
+          var diff = this.findDifference(this.layout, this.originalLayout);
           if (diff.length > 0) {
             // console.log(diff);
             if (this.layout.length > this.originalLayout.length) {
@@ -1640,12 +2140,10 @@ var elementResizeDetectorMaker = __webpack_require__("eec4");
               });
             }
           }
-
           this.lastLayoutLength = this.layout.length;
           this.initResponsiveFeatures();
         }
-
-        Object(utils["c" /* compact */])(this.layout, this.verticalCompact);
+        Object(utils["c" /* compact */])(this.layout, this.verticalCompact, this.allowCover);
         this.eventBus.$emit("updateWidth", this.width);
         this.updateHeight();
         this.$emit('layout-updated', this.layout);
@@ -1660,39 +2158,36 @@ var elementResizeDetectorMaker = __webpack_require__("eec4");
       if (this.$refs !== null && this.$refs.item !== null && this.$refs.item !== undefined) {
         this.width = this.$refs.item.offsetWidth;
       }
-
       this.eventBus.$emit("resizeEvent");
     },
     containerHeight: function containerHeight() {
-      if (!this.autoSize) return; // console.log("bottom: " + bottom(this.layout))
+      if (!this.autoSize) return;
+      // console.log("bottom: " + bottom(this.layout))
       // console.log("rowHeight + margins: " + (this.rowHeight + this.margin[1]) + this.margin[1])
-
       var containerHeight = Object(utils["a" /* bottom */])(this.layout) * (this.rowHeight + this.margin[1]) + this.margin[1] + 'px';
       return containerHeight;
     },
     dragEvent: function dragEvent(eventName, id, x, y, h, w) {
       //console.log(eventName + " id=" + id + ", x=" + x + ", y=" + y);
-      var l = Object(utils["f" /* getLayoutItem */])(this.layout, id); //GetLayoutItem sometimes returns null object
-
+      var l = Object(utils["f" /* getLayoutItem */])(this.layout, id);
+      //GetLayoutItem sometimes returns null object
       if (l === undefined || l === null) {
         l = {
           x: 0,
           y: 0
         };
       }
-
       if (eventName === "dragstart" && !this.verticalCompact) {
         this.positionsBeforeDrag = this.layout.reduce(function (result, _ref) {
           var i = _ref.i,
-              x = _ref.x,
-              y = _ref.y;
+            x = _ref.x,
+            y = _ref.y;
           return _objectSpread(_objectSpread({}, result), {}, Object(defineProperty["a" /* default */])({}, i, {
             x: x,
             y: y
           }));
         }, {});
       }
-
       if (eventName === "dragmove" || eventName === "dragstart") {
         this.placeholder.i = id;
         this.placeholder.x = l.x;
@@ -1701,49 +2196,45 @@ var elementResizeDetectorMaker = __webpack_require__("eec4");
         this.placeholder.h = h;
         this.$nextTick(function () {
           this.isDragging = true;
-        }); //this.$broadcast("updateWidth", this.width);
-
+        });
+        //this.$broadcast("updateWidth", this.width);
         this.eventBus.$emit("updateWidth", this.width);
       } else {
         this.$nextTick(function () {
           this.isDragging = false;
         });
-      } // Move the element to the dragged location.
+      }
 
-
-      this.layout = Object(utils["g" /* moveElement */])(this.layout, l, x, y, true, this.preventCollision);
-
+      // Move the element to the dragged location if don`t allow layout cover .
+      this.layout = Object(utils["g" /* moveElement */])(this.layout, l, x, y, true, this.allowCover, this.preventCollision);
       if (this.restoreOnDrag) {
         // Do not compact items more than in layout before drag
         // Set moved item as static to avoid to compact it
         l.static = true;
-        Object(utils["c" /* compact */])(this.layout, this.verticalCompact, this.positionsBeforeDrag);
+        Object(utils["c" /* compact */])(this.layout, this.verticalCompact, this.allowCover, this.positionsBeforeDrag);
         l.static = false;
       } else {
-        Object(utils["c" /* compact */])(this.layout, this.verticalCompact);
-      } // needed because vue can't detect changes on array element properties
+        Object(utils["c" /* compact */])(this.layout, this.verticalCompact, this.allowCover);
+      }
 
-
+      // needed because vue can't detect changes on array element properties
       this.eventBus.$emit("compact");
       this.updateHeight();
-
       if (eventName === 'dragend') {
         delete this.positionsBeforeDrag;
         this.$emit('layout-updated', this.layout);
       }
     },
     resizeEvent: function resizeEvent(eventName, id, x, y, h, w) {
-      var l = Object(utils["f" /* getLayoutItem */])(this.layout, id); //GetLayoutItem sometimes return null object
-
+      var l = Object(utils["f" /* getLayoutItem */])(this.layout, id);
+      //GetLayoutItem sometimes return null object
       if (l === undefined || l === null) {
         l = {
           h: 0,
           w: 0
         };
       }
-
       var hasCollisions;
-
       if (this.preventCollision) {
         var collisions = Object(utils["e" /* getAllCollisions */])(this.layout, _objectSpread(_objectSpread({}, l), {}, {
           w: w,
@@ -1751,12 +2242,13 @@ var elementResizeDetectorMaker = __webpack_require__("eec4");
         })).filter(function (layoutItem) {
           return layoutItem.i !== l.i;
         });
-        hasCollisions = collisions.length > 0; // If we're colliding, we need adjust the placeholder.
+        hasCollisions = collisions.length > 0;
 
+        // If we're colliding, we need adjust the placeholder.
         if (hasCollisions) {
           // adjust w && h to maximum allowed space
           var leastX = Infinity,
-              leastY = Infinity;
+            leastY = Infinity;
           collisions.forEach(function (layoutItem) {
             if (layoutItem.x > l.x) leastX = Math.min(leastX, layoutItem.x);
             if (layoutItem.y > l.y) leastY = Math.min(leastY, layoutItem.y);
@@ -1765,13 +2257,11 @@ var elementResizeDetectorMaker = __webpack_require__("eec4");
           if (Number.isFinite(leastY)) l.h = leastY - l.y;
         }
       }
-
       if (!hasCollisions) {
         // Set new width and height.
         l.w = w;
         l.h = h;
       }
-
       if (eventName === "resizestart" || eventName === "resizemove") {
         this.placeholder.i = id;
         this.placeholder.x = x;
@@ -1780,17 +2270,16 @@ var elementResizeDetectorMaker = __webpack_require__("eec4");
         this.placeholder.h = l.h;
         this.$nextTick(function () {
           this.isDragging = true;
-        }); //this.$broadcast("updateWidth", this.width);
-
+        });
+        //this.$broadcast("updateWidth", this.width);
         this.eventBus.$emit("updateWidth", this.width);
       } else {
         this.$nextTick(function () {
           this.isDragging = false;
         });
       }
-
       if (this.responsive) this.responsiveGridLayout();
-      Object(utils["c" /* compact */])(this.layout, this.verticalCompact);
+      Object(utils["c" /* compact */])(this.layout, this.verticalCompact, this.allowCover);
       this.eventBus.$emit("compact");
       this.updateHeight();
       if (eventName === 'resizeend') this.$emit('layout-updated', this.layout);
@@ -1798,19 +2287,21 @@ var elementResizeDetectorMaker = __webpack_require__("eec4");
     // finds or generates new layouts for set breakpoints
     responsiveGridLayout: function responsiveGridLayout() {
       var newBreakpoint = Object(responsiveUtils["b" /* getBreakpointFromWidth */])(this.breakpoints, this.width);
-      var newCols = Object(responsiveUtils["c" /* getColsFromBreakpoint */])(newBreakpoint, this.cols); // save actual layout in layouts
+      var newCols = Object(responsiveUtils["c" /* getColsFromBreakpoint */])(newBreakpoint, this.cols);
 
-      if (this.lastBreakpoint != null && !this.layouts[this.lastBreakpoint]) this.layouts[this.lastBreakpoint] = Object(utils["b" /* cloneLayout */])(this.layout); // Find or generate a new layout.
+      // save actual layout in layouts
+      if (this.lastBreakpoint != null && !this.layouts[this.lastBreakpoint]) this.layouts[this.lastBreakpoint] = Object(utils["b" /* cloneLayout */])(this.layout);
 
-      var layout = Object(responsiveUtils["a" /* findOrGenerateResponsiveLayout */])(this.originalLayout, this.layouts, this.breakpoints, newBreakpoint, this.lastBreakpoint, newCols, this.verticalCompact); // Store the new layout.
+      // Find or generate a new layout.
+      var layout = Object(responsiveUtils["a" /* findOrGenerateResponsiveLayout */])(this.originalLayout, this.layouts, this.breakpoints, newBreakpoint, this.lastBreakpoint, newCols, this.verticalCompact);
 
+      // Store the new layout.
       this.layouts[newBreakpoint] = layout;
-
       if (this.lastBreakpoint !== newBreakpoint) {
         this.$emit('breakpoint-changed', newBreakpoint, layout);
-      } // new prop sync
+      }
 
-
+      // new prop sync
       this.$emit('update:layout', layout);
       this.lastBreakpoint = newBreakpoint;
       this.eventBus.$emit("setColNum", Object(responsiveUtils["c" /* getColsFromBreakpoint */])(newBreakpoint, this.cols));
@@ -1827,22 +2318,24 @@ var elementResizeDetectorMaker = __webpack_require__("eec4");
         return !originalLayout.some(function (obj2) {
           return obj.i === obj2.i;
         });
-      }); //Find values that are in result2 but not in result1
+      });
 
+      //Find values that are in result2 but not in result1
       var uniqueResultTwo = originalLayout.filter(function (obj) {
         return !layout.some(function (obj2) {
           return obj.i === obj2.i;
         });
-      }); //Combine the two arrays of unique entries#
+      });
 
+      //Combine the two arrays of unique entries#
       return uniqueResultOne.concat(uniqueResultTwo);
     }
   }
 });
-// CONCATENATED MODULE: ./src/components/GridLayout.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_GridLayoutvue_type_script_lang_js_ = (GridLayoutvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./src/components/GridLayout.vue?vue&type=style&index=0&lang=css&
-var GridLayoutvue_type_style_index_0_lang_css_ = __webpack_require__("e279");
+// CONCATENATED MODULE: ./src/components/GridLayout.vue?vue&type=script&lang=js
+ /* harmony default export */ var components_GridLayoutvue_type_script_lang_js = (GridLayoutvue_type_script_lang_js); 
+// EXTERNAL MODULE: ./src/components/GridLayout.vue?vue&type=style&index=0&id=73ba11da&prod&lang=css
+var GridLayoutvue_type_style_index_0_id_73ba11da_prod_lang_css = __webpack_require__("fbff");
 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__("2877");
@@ -1857,7 +2350,7 @@ var componentNormalizer = __webpack_require__("2877");
 /* normalize component */
 
 var component = Object(componentNormalizer["a" /* default */])(
-  components_GridLayoutvue_type_script_lang_js_,
+  components_GridLayoutvue_type_script_lang_js,
   render,
   staticRenderFns,
   false,
@@ -1891,6 +2384,19 @@ module.exports = Object.getPrototypeOf || function (O) {
 
 /***/ }),
 
+/***/ "3a38":
+/***/ (function(module, exports) {
+
+// 7.1.4 ToInteger
+var ceil = Math.ceil;
+var floor = Math.floor;
+module.exports = function (it) {
+  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+};
+
+
+/***/ }),
+
 /***/ "41a0":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1907,6 +2413,34 @@ __webpack_require__("32e9")(IteratorPrototype, __webpack_require__("2b4c")('iter
 module.exports = function (Constructor, NAME, next) {
   Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
   setToStringTag(Constructor, NAME + ' Iterator');
+};
+
+
+/***/ }),
+
+/***/ "4458":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("b701");
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("499e").default
+var update = add("772e49c6", content, true, {"sourceMap":false,"shadowMode":false});
+
+/***/ }),
+
+/***/ "454f":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("46a7");
+var $Object = __webpack_require__("584a").Object;
+module.exports = function defineProperty(it, key, desc) {
+  return $Object.defineProperty(it, key, desc);
 };
 
 
@@ -1941,6 +2475,35 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "4595":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("2350")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".vue-grid-item{-webkit-transition:all .2s ease;transition:all .2s ease;-webkit-transition-property:left,top,right;transition-property:left,top,right}.vue-grid-item.no-touch{-ms-touch-action:none;touch-action:none}.vue-grid-item.cssTransforms{-webkit-transition-property:-webkit-transform;transition-property:-webkit-transform;transition-property:transform;transition-property:transform,-webkit-transform;left:0;right:auto}.vue-grid-item.cssTransforms.render-rtl{left:auto;right:0}.vue-grid-item.resizing{opacity:.6;z-index:3}.vue-grid-item.vue-draggable-dragging{-webkit-transition:none;transition:none;z-index:3}.vue-grid-item.vue-grid-placeholder{background:red;opacity:.2;-webkit-transition-duration:.1s;transition-duration:.1s;z-index:2;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none}.vue-grid-item>.vue-resizable-handle{position:absolute;width:20px;height:20px;bottom:0;right:0;background:url(\"data:image/svg+xml;base64,PHN2ZyBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjojZmZmZmZmMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjYiIGhlaWdodD0iNiI+PHBhdGggZD0iTTYgNkgwVjQuMmg0LjJWMEg2djZ6IiBvcGFjaXR5PSIuMzAyIi8+PC9zdmc+\");background-position:100% 100%;padding:0 3px 3px 0;background-repeat:no-repeat;background-origin:content-box;-webkit-box-sizing:border-box;box-sizing:border-box;cursor:se-resize}.vue-grid-item>.vue-rtl-resizable-handle{bottom:0;left:0;background:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTS0xLTFoMTJ2MTJILTF6Ii8+PGc+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InVuZGVmaW5lZCIgc3Ryb2tlLWxpbmVqb2luPSJ1bmRlZmluZWQiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2U9IiMwMDAiIGZpbGw9Im5vbmUiIGQ9Ik0xNDQuODIxLTM4LjM5M2wtMjAuMzU3LTMxLjc4NSIvPjxwYXRoIHN0cm9rZT0iIzY2NiIgc3Ryb2tlLWxpbmVjYXA9InVuZGVmaW5lZCIgc3Ryb2tlLWxpbmVqb2luPSJ1bmRlZmluZWQiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgZD0iTS45NDctLjAxOHY5LjEyNU0tLjY1NiA5aDEwLjczIi8+PC9nPjwvc3ZnPg==);background-position:0 100%;padding-left:3px;background-repeat:no-repeat;background-origin:content-box;cursor:sw-resize;right:auto}.vue-grid-item.disable-userselect{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "45f2":
+/***/ (function(module, exports, __webpack_require__) {
+
+var def = __webpack_require__("d9f6").f;
+var has = __webpack_require__("07e3");
+var TAG = __webpack_require__("5168")('toStringTag');
+
+module.exports = function (it, tag, stat) {
+  if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
+};
+
+
+/***/ }),
+
 /***/ "4630":
 /***/ (function(module, exports) {
 
@@ -1952,6 +2515,46 @@ module.exports = function (bitmap, value) {
     value: value
   };
 };
+
+
+/***/ }),
+
+/***/ "46a7":
+/***/ (function(module, exports, __webpack_require__) {
+
+var $export = __webpack_require__("63b6");
+// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+$export($export.S + $export.F * !__webpack_require__("8e60"), 'Object', { defineProperty: __webpack_require__("d9f6").f });
+
+
+/***/ }),
+
+/***/ "47ee":
+/***/ (function(module, exports, __webpack_require__) {
+
+// all enumerable object keys, includes symbols
+var getKeys = __webpack_require__("c3a1");
+var gOPS = __webpack_require__("9aa9");
+var pIE = __webpack_require__("355d");
+module.exports = function (it) {
+  var result = getKeys(it);
+  var getSymbols = gOPS.f;
+  if (getSymbols) {
+    var symbols = getSymbols(it);
+    var isEnum = pIE.f;
+    var i = 0;
+    var key;
+    while (symbols.length > i) if (isEnum.call(it, key = symbols[i++])) result.push(key);
+  } return result;
+};
+
+
+/***/ }),
+
+/***/ "481b":
+/***/ (function(module, exports) {
+
+module.exports = {};
 
 
 /***/ }),
@@ -2350,6 +2953,22 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "4e24":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("4595");
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("499e").default
+var update = add("a7e19108", content, true, {"sourceMap":false,"shadowMode":false});
+
+/***/ }),
+
 /***/ "5058":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2428,6 +3047,34 @@ function getOption(options, name, defaultValue) {
 
 /***/ }),
 
+/***/ "50ed":
+/***/ (function(module, exports) {
+
+module.exports = function (done, value) {
+  return { value: value, done: !!done };
+};
+
+
+/***/ }),
+
+/***/ "5168":
+/***/ (function(module, exports, __webpack_require__) {
+
+var store = __webpack_require__("dbdb")('wks');
+var uid = __webpack_require__("62a0");
+var Symbol = __webpack_require__("e53d").Symbol;
+var USE_SYMBOL = typeof Symbol == 'function';
+
+var $exports = module.exports = function (name) {
+  return store[name] || (store[name] =
+    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
+};
+
+$exports.store = store;
+
+
+/***/ }),
+
 /***/ "520a":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2502,6 +3149,26 @@ exports.f = {}.propertyIsEnumerable;
 
 /***/ }),
 
+/***/ "53e2":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
+var has = __webpack_require__("07e3");
+var toObject = __webpack_require__("241e");
+var IE_PROTO = __webpack_require__("5559")('IE_PROTO');
+var ObjectProto = Object.prototype;
+
+module.exports = Object.getPrototypeOf || function (O) {
+  O = toObject(O);
+  if (has(O, IE_PROTO)) return O[IE_PROTO];
+  if (typeof O.constructor == 'function' && O instanceof O.constructor) {
+    return O.constructor.prototype;
+  } return O instanceof Object ? ObjectProto : null;
+};
+
+
+/***/ }),
+
 /***/ "5537":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2517,6 +3184,18 @@ var store = global[SHARED] || (global[SHARED] = {});
   mode: __webpack_require__("2d00") ? 'pure' : 'global',
   copyright: '© 2020 Denis Pushkarev (zloirock.ru)'
 });
+
+
+/***/ }),
+
+/***/ "5559":
+/***/ (function(module, exports, __webpack_require__) {
+
+var shared = __webpack_require__("dbdb")('keys');
+var uid = __webpack_require__("62a0");
+module.exports = function (key) {
+  return shared[key] || (shared[key] = uid(key));
+};
 
 
 /***/ }),
@@ -2548,6 +3227,45 @@ $export($export.P + $export.F * (fails(function () {
       : $sort.call(toObject(this), aFunction(comparefn));
   }
 });
+
+
+/***/ }),
+
+/***/ "584a":
+/***/ (function(module, exports) {
+
+var core = module.exports = { version: '2.6.12' };
+if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
+
+
+/***/ }),
+
+/***/ "5b4e":
+/***/ (function(module, exports, __webpack_require__) {
+
+// false -> Array#indexOf
+// true  -> Array#includes
+var toIObject = __webpack_require__("36c3");
+var toLength = __webpack_require__("b447");
+var toAbsoluteIndex = __webpack_require__("0fc9");
+module.exports = function (IS_INCLUDES) {
+  return function ($this, el, fromIndex) {
+    var O = toIObject($this);
+    var length = toLength(O.length);
+    var index = toAbsoluteIndex(fromIndex, length);
+    var value;
+    // Array#includes uses SameValueZero equality algorithm
+    // eslint-disable-next-line no-self-compare
+    if (IS_INCLUDES && el != el) while (length > index) {
+      value = O[index++];
+      // eslint-disable-next-line no-self-compare
+      if (value != value) return true;
+    // Array#indexOf ignores holes, Array#includes - not
+    } else for (;length > index; index++) if (IS_INCLUDES || index in O) {
+      if (O[index] === el) return IS_INCLUDES || index || 0;
+    } return !IS_INCLUDES && -1;
+  };
+};
 
 
 /***/ }),
@@ -2678,17 +3396,6 @@ module.exports = function (that, target, C) {
 
 /***/ }),
 
-/***/ "5ed4":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GridItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("6e21");
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GridItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GridItem_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
-
-
-/***/ }),
-
 /***/ "5eda":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2760,6 +3467,103 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 
 /***/ }),
 
+/***/ "62a0":
+/***/ (function(module, exports) {
+
+var id = 0;
+var px = Math.random();
+module.exports = function (key) {
+  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+};
+
+
+/***/ }),
+
+/***/ "63b6":
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__("e53d");
+var core = __webpack_require__("584a");
+var ctx = __webpack_require__("d864");
+var hide = __webpack_require__("35e8");
+var has = __webpack_require__("07e3");
+var PROTOTYPE = 'prototype';
+
+var $export = function (type, name, source) {
+  var IS_FORCED = type & $export.F;
+  var IS_GLOBAL = type & $export.G;
+  var IS_STATIC = type & $export.S;
+  var IS_PROTO = type & $export.P;
+  var IS_BIND = type & $export.B;
+  var IS_WRAP = type & $export.W;
+  var exports = IS_GLOBAL ? core : core[name] || (core[name] = {});
+  var expProto = exports[PROTOTYPE];
+  var target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE];
+  var key, own, out;
+  if (IS_GLOBAL) source = name;
+  for (key in source) {
+    // contains in native
+    own = !IS_FORCED && target && target[key] !== undefined;
+    if (own && has(exports, key)) continue;
+    // export native or passed
+    out = own ? target[key] : source[key];
+    // prevent global pollution for namespaces
+    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
+    // bind timers to global for call from export context
+    : IS_BIND && own ? ctx(out, global)
+    // wrap global constructors for prevent change them in library
+    : IS_WRAP && target[key] == out ? (function (C) {
+      var F = function (a, b, c) {
+        if (this instanceof C) {
+          switch (arguments.length) {
+            case 0: return new C();
+            case 1: return new C(a);
+            case 2: return new C(a, b);
+          } return new C(a, b, c);
+        } return C.apply(this, arguments);
+      };
+      F[PROTOTYPE] = C[PROTOTYPE];
+      return F;
+    // make static versions for prototype methods
+    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
+    if (IS_PROTO) {
+      (exports.virtual || (exports.virtual = {}))[key] = out;
+      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
+      if (type & $export.R && expProto && !expProto[key]) hide(expProto, key, out);
+    }
+  }
+};
+// type bitmap
+$export.F = 1;   // forced
+$export.G = 2;   // global
+$export.S = 4;   // static
+$export.P = 8;   // proto
+$export.B = 16;  // bind
+$export.W = 32;  // wrap
+$export.U = 64;  // safe
+$export.R = 128; // real proto method for `library`
+module.exports = $export;
+
+
+/***/ }),
+
+/***/ "6718":
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__("e53d");
+var core = __webpack_require__("584a");
+var LIBRARY = __webpack_require__("b8e3");
+var wksExt = __webpack_require__("ccb9");
+var defineProperty = __webpack_require__("d9f6").f;
+module.exports = function (name) {
+  var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
+  if (name.charAt(0) != '_' && !(name in $Symbol)) defineProperty($Symbol, name, { value: wksExt.f(name) });
+};
+
+
+/***/ }),
+
 /***/ "6821":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2784,6 +3588,14 @@ module.exports = function (it, key) {
 
 /***/ }),
 
+/***/ "69d3":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("6718")('asyncIterator');
+
+
+/***/ }),
+
 /***/ "6a99":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2803,63 +3615,86 @@ module.exports = function (it, S) {
 
 /***/ }),
 
-/***/ "6e21":
+/***/ "6abf":
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
+// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
+var $keys = __webpack_require__("e6f3");
+var hiddenKeys = __webpack_require__("1691").concat('length', 'prototype');
 
-// load the styles
-var content = __webpack_require__("9cbe");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("499e").default
-var update = add("3cbd0c21", content, true, {"sourceMap":false,"shadowMode":false});
+exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
+  return $keys(O, hiddenKeys);
+};
+
 
 /***/ }),
 
-/***/ "7333":
+/***/ "6b4c":
+/***/ (function(module, exports) {
+
+var toString = {}.toString;
+
+module.exports = function (it) {
+  return toString.call(it).slice(8, -1);
+};
+
+
+/***/ }),
+
+/***/ "6c1c":
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
+__webpack_require__("c367");
+var global = __webpack_require__("e53d");
+var hide = __webpack_require__("35e8");
+var Iterators = __webpack_require__("481b");
+var TO_STRING_TAG = __webpack_require__("5168")('toStringTag');
 
-// 19.1.2.1 Object.assign(target, source, ...)
-var DESCRIPTORS = __webpack_require__("9e1e");
-var getKeys = __webpack_require__("0d58");
-var gOPS = __webpack_require__("2621");
-var pIE = __webpack_require__("52a7");
-var toObject = __webpack_require__("4bf8");
-var IObject = __webpack_require__("626a");
-var $assign = Object.assign;
+var DOMIterables = ('CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,' +
+  'DOMTokenList,DataTransferItemList,FileList,HTMLAllCollection,HTMLCollection,HTMLFormElement,HTMLSelectElement,' +
+  'MediaList,MimeTypeArray,NamedNodeMap,NodeList,PaintRequestList,Plugin,PluginArray,SVGLengthList,SVGNumberList,' +
+  'SVGPathSegList,SVGPointList,SVGStringList,SVGTransformList,SourceBufferList,StyleSheetList,TextTrackCueList,' +
+  'TextTrackList,TouchList').split(',');
 
-// should work with symbols and should have deterministic property order (V8 bug)
-module.exports = !$assign || __webpack_require__("79e5")(function () {
-  var A = {};
-  var B = {};
-  // eslint-disable-next-line no-undef
-  var S = Symbol();
-  var K = 'abcdefghijklmnopqrst';
-  A[S] = 7;
-  K.split('').forEach(function (k) { B[k] = k; });
-  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
-}) ? function assign(target, source) { // eslint-disable-line no-unused-vars
-  var T = toObject(target);
-  var aLen = arguments.length;
-  var index = 1;
-  var getSymbols = gOPS.f;
-  var isEnum = pIE.f;
-  while (aLen > index) {
-    var S = IObject(arguments[index++]);
-    var keys = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S);
-    var length = keys.length;
-    var j = 0;
-    var key;
-    while (length > j) {
-      key = keys[j++];
-      if (!DESCRIPTORS || isEnum.call(S, key)) T[key] = S[key];
-    }
-  } return T;
-} : $assign;
+for (var i = 0; i < DOMIterables.length; i++) {
+  var NAME = DOMIterables[i];
+  var Collection = global[NAME];
+  var proto = Collection && Collection.prototype;
+  if (proto && !proto[TO_STRING_TAG]) hide(proto, TO_STRING_TAG, NAME);
+  Iterators[NAME] = Iterators.Array;
+}
+
+
+/***/ }),
+
+/***/ "71c1":
+/***/ (function(module, exports, __webpack_require__) {
+
+var toInteger = __webpack_require__("3a38");
+var defined = __webpack_require__("25eb");
+// true  -> String#at
+// false -> String#codePointAt
+module.exports = function (TO_STRING) {
+  return function (that, pos) {
+    var s = String(defined(that));
+    var i = toInteger(pos);
+    var l = s.length;
+    var a, b;
+    if (i < 0 || i >= l) return TO_STRING ? '' : undefined;
+    a = s.charCodeAt(i);
+    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
+      ? TO_STRING ? s.charAt(i) : a
+      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+  };
+};
+
+
+/***/ }),
+
+/***/ "765d":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("6718")('observable');
 
 
 /***/ }),
@@ -2891,6 +3726,27 @@ module.exports = function (index, length) {
 
 /***/ }),
 
+/***/ "794b":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = !__webpack_require__("8e60") && !__webpack_require__("294c")(function () {
+  return Object.defineProperty(__webpack_require__("1ec9")('div'), 'a', { get: function () { return 7; } }).a != 7;
+});
+
+
+/***/ }),
+
+/***/ "79aa":
+/***/ (function(module, exports) {
+
+module.exports = function (it) {
+  if (typeof it != 'function') throw TypeError(it + ' is not a function!');
+  return it;
+};
+
+
+/***/ }),
+
 /***/ "79e5":
 /***/ (function(module, exports) {
 
@@ -2900,6 +3756,26 @@ module.exports = function (exec) {
   } catch (e) {
     return true;
   }
+};
+
+
+/***/ }),
+
+/***/ "7e90":
+/***/ (function(module, exports, __webpack_require__) {
+
+var dP = __webpack_require__("d9f6");
+var anObject = __webpack_require__("e4ae");
+var getKeys = __webpack_require__("c3a1");
+
+module.exports = __webpack_require__("8e60") ? Object.defineProperties : function defineProperties(O, Properties) {
+  anObject(O);
+  var keys = getKeys(Properties);
+  var length = keys.length;
+  var i = 0;
+  var P;
+  while (length > i) dP.f(O, P = keys[i++], Properties[P]);
+  return O;
 };
 
 
@@ -2947,6 +3823,14 @@ NAME in FProto || __webpack_require__("9e1e") && dP(FProto, NAME, {
 
 var core = module.exports = { version: '2.6.12' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
+
+
+/***/ }),
+
+/***/ "8436":
+/***/ (function(module, exports) {
+
+module.exports = function () { /* empty */ };
 
 
 /***/ }),
@@ -3017,7 +3901,18 @@ module.exports = {
 /***/ "8bbf":
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__8bbf__;
+module.exports = require("vue");
+
+/***/ }),
+
+/***/ "8e60":
+/***/ (function(module, exports, __webpack_require__) {
+
+// Thank's IE8 for his funny defineProperty
+module.exports = !__webpack_require__("294c")(function () {
+  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
+});
+
 
 /***/ }),
 
@@ -3050,6 +3945,39 @@ $export($export.S, 'Object', {
 
 /***/ }),
 
+/***/ "8f60":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var create = __webpack_require__("a159");
+var descriptor = __webpack_require__("aebd");
+var setToStringTag = __webpack_require__("45f2");
+var IteratorPrototype = {};
+
+// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
+__webpack_require__("35e8")(IteratorPrototype, __webpack_require__("5168")('iterator'), function () { return this; });
+
+module.exports = function (Constructor, NAME, next) {
+  Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
+  setToStringTag(Constructor, NAME + ' Iterator');
+};
+
+
+/***/ }),
+
+/***/ "9003":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 7.2.2 IsArray(argument)
+var cof = __webpack_require__("6b4c");
+module.exports = Array.isArray || function isArray(arg) {
+  return cof(arg) == 'Array';
+};
+
+
+/***/ }),
+
 /***/ "9093":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3060,6 +3988,14 @@ var hiddenKeys = __webpack_require__("e11e").concat('length', 'prototype');
 exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
   return $keys(O, hiddenKeys);
 };
+
+
+/***/ }),
+
+/***/ "9138":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__("35e8");
 
 
 /***/ }),
@@ -3077,12 +4013,9 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 /* harmony import */ var core_js_modules_es6_array_sort__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_sort__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("ac6a");
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("cadf");
-/* harmony import */ var core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("456d");
-/* harmony import */ var core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("a2b6");
-
+/* harmony import */ var core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("456d");
+/* harmony import */ var core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("a2b6");
 
 
 
@@ -3090,11 +4023,8 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 
 
 /*:: import type {Layout} from './utils';*/
-
 /*:: export type ResponsiveLayout = {lg?: Layout, md?: Layout, sm?: Layout, xs?: Layout, xxs?: Layout};*/
-
 /*:: type Breakpoint = string;*/
-
 /**
  * Given a width, find the highest breakpoint that matches is valid for it (width > breakpoint).
  *
@@ -3102,46 +4032,30 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
  * @param  {Number} width Screen width.
  * @return {String}       Highest breakpoint that is less than width.
  */
-
 /*:: type Breakpoints = {lg?: number, md?: number, sm?: number, xs?: number, xxs?: number};*/
-
-function getBreakpointFromWidth(breakpoints
-/*: Breakpoints*/
-, width
-/*: number*/
-)
-/*: Breakpoint*/
-{
+function getBreakpointFromWidth(breakpoints /*: Breakpoints*/, width /*: number*/) /*: Breakpoint*/ {
   var sorted = sortBreakpoints(breakpoints);
   var matching = sorted[0];
-
   for (var i = 1, len = sorted.length; i < len; i++) {
     var breakpointName = sorted[i];
     if (width > breakpoints[breakpointName]) matching = breakpointName;
   }
-
   return matching;
 }
+
 /**
  * Given a breakpoint, get the # of cols set for it.
  * @param  {String} breakpoint Breakpoint name.
  * @param  {Object} cols       Map of breakpoints to cols.
  * @return {Number}            Number of cols.
  */
-
-function getColsFromBreakpoint(breakpoint
-/*: Breakpoint*/
-, cols
-/*: Breakpoints*/
-)
-/*: number*/
-{
+function getColsFromBreakpoint(breakpoint /*: Breakpoint*/, cols /*: Breakpoints*/) /*: number*/ {
   if (!cols[breakpoint]) {
     throw new Error("ResponsiveGridLayout: `cols` entry for breakpoint " + breakpoint + " is missing!");
   }
-
   return cols[breakpoint];
 }
+
 /**
  * Given existing layouts and a new breakpoint, find or generate a new layout.
  *
@@ -3157,67 +4071,30 @@ function getColsFromBreakpoint(breakpoint
  *   vertically.
  * @return {Array}             New layout.
  */
-
-function findOrGenerateResponsiveLayout(orgLayout
-/*: Layout*/
-, layouts
-/*: ResponsiveLayout*/
-, breakpoints
-/*: Breakpoints*/
-, breakpoint
-/*: Breakpoint*/
-, lastBreakpoint
-/*: Breakpoint*/
-, cols
-/*: number*/
-, verticalCompact
-/*: boolean*/
-)
-/*: Layout*/
-{
+function findOrGenerateResponsiveLayout(orgLayout /*: Layout*/, layouts /*: ResponsiveLayout*/, breakpoints /*: Breakpoints*/, breakpoint /*: Breakpoint*/, lastBreakpoint /*: Breakpoint*/, cols /*: number*/, verticalCompact /*: boolean*/) /*: Layout*/ {
   // If it already exists, just return it.
-  if (layouts[breakpoint]) return Object(_utils__WEBPACK_IMPORTED_MODULE_4__[/* cloneLayout */ "b"])(layouts[breakpoint]); // Find or generate the next layout
-
+  if (layouts[breakpoint]) return Object(_utils__WEBPACK_IMPORTED_MODULE_3__[/* cloneLayout */ "b"])(layouts[breakpoint]);
+  // Find or generate the next layout
   var layout = orgLayout;
   var breakpointsSorted = sortBreakpoints(breakpoints);
   var breakpointsAbove = breakpointsSorted.slice(breakpointsSorted.indexOf(breakpoint));
-
   for (var i = 0, len = breakpointsAbove.length; i < len; i++) {
     var b = breakpointsAbove[i];
-
     if (layouts[b]) {
       layout = layouts[b];
       break;
     }
   }
-
-  layout = Object(_utils__WEBPACK_IMPORTED_MODULE_4__[/* cloneLayout */ "b"])(layout || []); // clone layout so we don't modify existing items
-
-  return Object(_utils__WEBPACK_IMPORTED_MODULE_4__[/* compact */ "c"])(Object(_utils__WEBPACK_IMPORTED_MODULE_4__[/* correctBounds */ "d"])(layout, {
+  layout = Object(_utils__WEBPACK_IMPORTED_MODULE_3__[/* cloneLayout */ "b"])(layout || []); // clone layout so we don't modify existing items
+  return Object(_utils__WEBPACK_IMPORTED_MODULE_3__[/* compact */ "c"])(Object(_utils__WEBPACK_IMPORTED_MODULE_3__[/* correctBounds */ "d"])(layout, {
     cols: cols
   }), verticalCompact);
 }
-function generateResponsiveLayout(layout
-/*: Layout*/
-, breakpoints
-/*: Breakpoints*/
-, breakpoint
-/*: Breakpoint*/
-, lastBreakpoint
-/*: Breakpoint*/
-, cols
-/*: number*/
-, verticalCompact
-/*: boolean*/
-)
-/*: Layout*/
-{
+function generateResponsiveLayout(layout /*: Layout*/, breakpoints /*: Breakpoints*/, breakpoint /*: Breakpoint*/, lastBreakpoint /*: Breakpoint*/, cols /*: number*/, verticalCompact /*: boolean*/) /*: Layout*/ {
   // If it already exists, just return it.
-
   /*if (layouts[breakpoint]) return cloneLayout(layouts[breakpoint]);
   // Find or generate the next layout
   let layout = layouts[lastBreakpoint];*/
-
   /*const breakpointsSorted = sortBreakpoints(breakpoints);
   const breakpointsAbove = breakpointsSorted.slice(breakpointsSorted.indexOf(breakpoint));
   for (let i = 0, len = breakpointsAbove.length; i < len; i++) {
@@ -3227,12 +4104,12 @@ function generateResponsiveLayout(layout
     break;
   }
   }*/
-  layout = Object(_utils__WEBPACK_IMPORTED_MODULE_4__[/* cloneLayout */ "b"])(layout || []); // clone layout so we don't modify existing items
-
-  return Object(_utils__WEBPACK_IMPORTED_MODULE_4__[/* compact */ "c"])(Object(_utils__WEBPACK_IMPORTED_MODULE_4__[/* correctBounds */ "d"])(layout, {
+  layout = Object(_utils__WEBPACK_IMPORTED_MODULE_3__[/* cloneLayout */ "b"])(layout || []); // clone layout so we don't modify existing items
+  return Object(_utils__WEBPACK_IMPORTED_MODULE_3__[/* compact */ "c"])(Object(_utils__WEBPACK_IMPORTED_MODULE_3__[/* correctBounds */ "d"])(layout, {
     cols: cols
   }), verticalCompact);
 }
+
 /**
  * Given breakpoints, return an array of breakpoints sorted by width. This is usually
  * e.g. ['xxs', 'xs', 'sm', ...]
@@ -3240,15 +4117,8 @@ function generateResponsiveLayout(layout
  * @param  {Object} breakpoints Key/value pair of breakpoint names to widths.
  * @return {Array}              Sorted breakpoints.
  */
-
-function sortBreakpoints(breakpoints
-/*: Breakpoints*/
-)
-/*: Array<Breakpoint>*/
-{
-  var keys
-  /*: Array<string>*/
-  = Object.keys(breakpoints);
+function sortBreakpoints(breakpoints /*: Breakpoints*/) /*: Array<Breakpoint>*/ {
+  var keys /*: Array<string>*/ = Object.keys(breakpoints);
   return keys.sort(function (a, b) {
     return breakpoints[a] - breakpoints[b];
   });
@@ -3269,6 +4139,14 @@ module.exports = Reflect && Reflect.ownKeys || function ownKeys(it) {
   var getSymbols = gOPS.f;
   return getSymbols ? keys.concat(getSymbols(it)) : keys;
 };
+
+
+/***/ }),
+
+/***/ "9aa9":
+/***/ (function(module, exports) {
+
+exports.f = Object.getOwnPropertySymbols;
 
 
 /***/ }),
@@ -3314,21 +4192,6 @@ module.exports = function (key) {
 
 /***/ }),
 
-/***/ "9cbe":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("2350")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".vue-grid-item{-webkit-transition:all .2s ease;transition:all .2s ease;-webkit-transition-property:left,top,right;transition-property:left,top,right}.vue-grid-item.no-touch{-ms-touch-action:none;touch-action:none}.vue-grid-item.cssTransforms{-webkit-transition-property:-webkit-transform;transition-property:-webkit-transform;transition-property:transform;transition-property:transform,-webkit-transform;left:0;right:auto}.vue-grid-item.cssTransforms.render-rtl{left:auto;right:0}.vue-grid-item.resizing{opacity:.6;z-index:3}.vue-grid-item.vue-draggable-dragging{-webkit-transition:none;transition:none;z-index:3}.vue-grid-item.vue-grid-placeholder{background:red;opacity:.2;-webkit-transition-duration:.1s;transition-duration:.1s;z-index:2;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none}.vue-grid-item>.vue-resizable-handle{position:absolute;width:20px;height:20px;bottom:0;right:0;background:url(\"data:image/svg+xml;base64,PHN2ZyBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjojZmZmZmZmMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjYiIGhlaWdodD0iNiI+PHBhdGggZD0iTTYgNkgwVjQuMmg0LjJWMEg2djZ6IiBvcGFjaXR5PSIuMzAyIi8+PC9zdmc+\");background-position:100% 100%;padding:0 3px 3px 0;background-repeat:no-repeat;background-origin:content-box;-webkit-box-sizing:border-box;box-sizing:border-box;cursor:se-resize}.vue-grid-item>.vue-rtl-resizable-handle{bottom:0;left:0;background:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTS0xLTFoMTJ2MTJILTF6Ii8+PGc+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InVuZGVmaW5lZCIgc3Ryb2tlLWxpbmVqb2luPSJ1bmRlZmluZWQiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2U9IiMwMDAiIGZpbGw9Im5vbmUiIGQ9Ik0xNDQuODIxLTM4LjM5M2wtMjAuMzU3LTMxLjc4NSIvPjxwYXRoIHN0cm9rZT0iIzY2NiIgc3Ryb2tlLWxpbmVjYXA9InVuZGVmaW5lZCIgc3Ryb2tlLWxpbmVqb2luPSJ1bmRlZmluZWQiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgZD0iTS45NDctLjAxOHY5LjEyNU0tLjY1NiA5aDEwLjczIi8+PC9nPjwvc3ZnPg==);background-position:0 100%;padding-left:3px;background-repeat:no-repeat;background-origin:content-box;cursor:sw-resize;right:auto}.vue-grid-item.disable-userselect{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "9def":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3349,6 +4212,54 @@ module.exports = function (it) {
 module.exports = !__webpack_require__("79e5")(function () {
   return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
 });
+
+
+/***/ }),
+
+/***/ "a159":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+var anObject = __webpack_require__("e4ae");
+var dPs = __webpack_require__("7e90");
+var enumBugKeys = __webpack_require__("1691");
+var IE_PROTO = __webpack_require__("5559")('IE_PROTO');
+var Empty = function () { /* empty */ };
+var PROTOTYPE = 'prototype';
+
+// Create object with fake `null` prototype: use iframe Object with cleared prototype
+var createDict = function () {
+  // Thrash, waste and sodomy: IE GC bug
+  var iframe = __webpack_require__("1ec9")('iframe');
+  var i = enumBugKeys.length;
+  var lt = '<';
+  var gt = '>';
+  var iframeDocument;
+  iframe.style.display = 'none';
+  __webpack_require__("32fc").appendChild(iframe);
+  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
+  // createDict = iframe.contentWindow.Object;
+  // html.removeChild(iframe);
+  iframeDocument = iframe.contentWindow.document;
+  iframeDocument.open();
+  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
+  iframeDocument.close();
+  createDict = iframeDocument.F;
+  while (i--) delete createDict[PROTOTYPE][enumBugKeys[i]];
+  return createDict();
+};
+
+module.exports = Object.create || function create(O, Properties) {
+  var result;
+  if (O !== null) {
+    Empty[PROTOTYPE] = anObject(O);
+    result = new Empty();
+    Empty[PROTOTYPE] = null;
+    // add "__proto__" for Object.getPrototypeOf polyfill
+    result[IE_PROTO] = O;
+  } else result = createDict();
+  return Properties === undefined ? result : dPs(result, Properties);
+};
 
 
 /***/ }),
@@ -3387,30 +4298,23 @@ module.exports = !__webpack_require__("79e5")(function () {
 /* unused harmony export findAndRemove */
 /* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a481");
 /* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("cadf");
-/* harmony import */ var core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("456d");
-/* harmony import */ var core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("ac6a");
-/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es6_array_sort__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("55dd");
-/* harmony import */ var core_js_modules_es6_array_sort__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_sort__WEBPACK_IMPORTED_MODULE_4__);
-
+/* harmony import */ var core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("456d");
+/* harmony import */ var core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_keys__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("ac6a");
+/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es6_array_sort__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("55dd");
+/* harmony import */ var core_js_modules_es6_array_sort__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_sort__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
 
 // @flow
-
 /*:: export type LayoutItemRequired = {w: number, h: number, x: number, y: number, i: string};*/
-
 /*:: export type LayoutItem = LayoutItemRequired &
                          {minW?: number, minH?: number, maxW?: number, maxH?: number,
                           moved?: boolean, static?: boolean,
                           isDraggable?: ?boolean, isResizable?: ?boolean};*/
-
 // export type Position = {left: number, top: number, width: number, height: number};
-
 /*
 export type DragCallbackData = {
   node: HTMLElement,
@@ -3420,55 +4324,35 @@ export type DragCallbackData = {
 };
 */
 // export type DragEvent = {e: Event} & DragCallbackData;
-
 /*:: export type Layout = Array<LayoutItem>;*/
-
 // export type ResizeEvent = {e: Event, node: HTMLElement, size: Size};
 // const isProduction = process.env.NODE_ENV === 'production';
-
 /**
  * Return the bottom coordinate of the layout.
  *
  * @param  {Array} layout Layout array.
  * @return {Number}       Bottom coordinate.
  */
-
 /*:: export type Size = {width: number, height: number};*/
-
-function bottom(layout
-/*: Layout*/
-)
-/*: number*/
-{
+function bottom(layout /*: Layout*/) /*: number*/ {
   var max = 0,
-      bottomY;
-
+    bottomY;
   for (var i = 0, len = layout.length; i < len; i++) {
     bottomY = layout[i].y + layout[i].h;
     if (bottomY > max) max = bottomY;
   }
-
   return max;
 }
-function cloneLayout(layout
-/*: Layout*/
-)
-/*: Layout*/
-{
+function cloneLayout(layout /*: Layout*/) /*: Layout*/ {
   var newLayout = Array(layout.length);
-
   for (var i = 0, len = layout.length; i < len; i++) {
     newLayout[i] = cloneLayoutItem(layout[i]);
   }
-
   return newLayout;
-} // Fast path to cloning, since this is monomorphic
+}
 
-function cloneLayoutItem(layoutItem
-/*: LayoutItem*/
-)
-/*: LayoutItem*/
-{
+// Fast path to cloning, since this is monomorphic
+function cloneLayoutItem(layoutItem /*: LayoutItem*/) /*: LayoutItem*/ {
   /*return {
     w: layoutItem.w, h: layoutItem.h, x: layoutItem.x, y: layoutItem.y, i: layoutItem.i,
     minW: layoutItem.minW, maxW: layoutItem.maxW, minH: layoutItem.minH, maxH: layoutItem.maxH,
@@ -3478,31 +4362,21 @@ function cloneLayoutItem(layoutItem
   };*/
   return JSON.parse(JSON.stringify(layoutItem));
 }
+
 /**
  * Given two layoutitems, check if they collide.
  *
  * @return {Boolean}   True if colliding.
  */
-
-function collides(l1
-/*: LayoutItem*/
-, l2
-/*: LayoutItem*/
-)
-/*: boolean*/
-{
+function collides(l1 /*: LayoutItem*/, l2 /*: LayoutItem*/) /*: boolean*/ {
   if (l1 === l2) return false; // same element
-
   if (l1.x + l1.w <= l2.x) return false; // l1 is left of l2
-
   if (l1.x >= l2.x + l2.w) return false; // l1 is right of l2
-
   if (l1.y + l1.h <= l2.y) return false; // l1 is above l2
-
   if (l1.y >= l2.y + l2.h) return false; // l1 is below l2
-
   return true; // boxes overlap
 }
+
 /**
  * Given a layout, compact it. This involves going down each y coordinate and removing gaps
  * between items.
@@ -3510,55 +4384,42 @@ function collides(l1
  * @param  {Array} layout Layout.
  * @param  {Boolean} verticalCompact Whether or not to compact the layout
  *   vertically.
+ * @param cover 是否能够网格覆盖
  * @param {Object} minPositions
- * @return {Array}       Compacted Layout.
+ * @return {Array}   Compacted Layout.
  */
-
-function compact(layout
-/*: Layout*/
-, verticalCompact
-/*: Boolean*/
-, minPositions)
-/*: Layout*/
-{
+function compact(layout /*: Layout*/, verticalCompact /*: Boolean*/, cover /*:Boolean*/, minPositions) /*: Layout*/ {
   // Statics go in the compareWith array right away so items flow around them.
-  var compareWith = getStatics(layout); // We go through the items by row and column.
-
-  var sorted = sortLayoutItemsByRowCol(layout); // Holding for new items.
-
+  var compareWith = getStatics(layout);
+  // We go through the items by row and column.
+  var sorted = sortLayoutItemsByRowCol(layout);
+  // Holding for new items.
   var out = Array(layout.length);
-
   for (var i = 0, len = sorted.length; i < len; i++) {
-    var l = sorted[i]; // Don't move static elements
+    var l = sorted[i];
 
+    // Don't move static elements
     if (!l.static) {
-      l = compactItem(compareWith, l, verticalCompact, minPositions); // Add to comparison array. We only collide with items before this one.
+      l = !!cover ? l : compactItem(compareWith, l, verticalCompact, minPositions);
+
+      // Add to comparison array. We only collide with items before this one.
       // Statics are already in this array.
-
       compareWith.push(l);
-    } // Add to output array to make sure they still come out in the right order.
+    }
 
+    // Add to output array to make sure they still come out in the right order.
+    out[layout.indexOf(l)] = l;
 
-    out[layout.indexOf(l)] = l; // Clear moved flag, if it exists.
-
+    // Clear moved flag, if it exists.
     l.moved = false;
   }
-
   return out;
 }
+
 /**
  * Compact an item in the layout.
  */
-
-function compactItem(compareWith
-/*: Layout*/
-, l
-/*: LayoutItem*/
-, verticalCompact
-/*: boolean*/
-, minPositions)
-/*: LayoutItem*/
-{
+function compactItem(compareWith /*: Layout*/, l /*: LayoutItem*/, verticalCompact /*: boolean*/, minPositions) /*: LayoutItem*/ {
   if (verticalCompact) {
     // Move the element up as far as it can go without colliding.
     while (l.y > 0 && !getFirstCollision(compareWith, l)) {
@@ -3566,47 +4427,36 @@ function compactItem(compareWith
     }
   } else if (minPositions) {
     var minY = minPositions[l.i].y;
-
     while (l.y > minY && !getFirstCollision(compareWith, l)) {
       l.y--;
     }
-  } // Move it down, and keep moving it down if it's colliding.
+  }
 
-
+  // Move it down, and keep moving it down if it's colliding.
   var collides;
-
   while (collides = getFirstCollision(compareWith, l)) {
     l.y = collides.y + collides.h;
   }
-
   return l;
 }
+
 /**
  * Given a layout, make sure all elements fit within its bounds.
  *
  * @param  {Array} layout Layout array.
  * @param  {Number} bounds Number of columns.
  */
-
-function correctBounds(layout
-/*: Layout*/
-, bounds
-/*: {cols: number}*/
-)
-/*: Layout*/
-{
+function correctBounds(layout /*: Layout*/, bounds /*: {cols: number}*/) /*: Layout*/ {
   var collidesWith = getStatics(layout);
-
   for (var i = 0, len = layout.length; i < len; i++) {
-    var l = layout[i]; // Overflows right
-
-    if (l.x + l.w > bounds.cols) l.x = bounds.cols - l.w; // Overflows left
-
+    var l = layout[i];
+    // Overflows right
+    if (l.x + l.w > bounds.cols) l.x = bounds.cols - l.w;
+    // Overflows left
     if (l.x < 0) {
       l.x = 0;
       l.w = bounds.cols;
     }
-
     if (!l.static) collidesWith.push(l);else {
       // If this is static and collides with other statics, we must move it down.
       // We have to do something nicer than just letting them overlap.
@@ -3615,9 +4465,9 @@ function correctBounds(layout
       }
     }
   }
-
   return layout;
 }
+
 /**
  * Get a layout item by ID. Used so we can override later on if necessary.
  *
@@ -3625,18 +4475,12 @@ function correctBounds(layout
  * @param  {String} id     ID
  * @return {LayoutItem}    Item at ID.
  */
-
-function getLayoutItem(layout
-/*: Layout*/
-, id
-/*: string*/
-)
-/*: ?LayoutItem*/
-{
+function getLayoutItem(layout /*: Layout*/, id /*: string*/) /*: ?LayoutItem*/ {
   for (var i = 0, len = layout.length; i < len; i++) {
     if (layout[i].i === id) return layout[i];
   }
 }
+
 /**
  * Returns the first item this layout collides with.
  * It doesn't appear to matter which order we approach this from, although
@@ -3645,45 +4489,29 @@ function getLayoutItem(layout
  * @param  {Object} layoutItem Layout item.
  * @return {Object|undefined}  A colliding layout item, or undefined.
  */
-
-function getFirstCollision(layout
-/*: Layout*/
-, layoutItem
-/*: LayoutItem*/
-)
-/*: ?LayoutItem*/
-{
+function getFirstCollision(layout /*: Layout*/, layoutItem /*: LayoutItem*/) /*: ?LayoutItem*/ {
   for (var i = 0, len = layout.length; i < len; i++) {
     if (collides(layout[i], layoutItem)) return layout[i];
   }
 }
-function getAllCollisions(layout
-/*: Layout*/
-, layoutItem
-/*: LayoutItem*/
-)
-/*: Array<LayoutItem>*/
-{
+function getAllCollisions(layout /*: Layout*/, layoutItem /*: LayoutItem*/) /*: Array<LayoutItem>*/ {
   return layout.filter(function (l) {
     return collides(l, layoutItem);
   });
 }
+
 /**
  * Get all static elements.
  * @param  {Array} layout Array of layout objects.
  * @return {Array}        Array of static layout items..
  */
-
-function getStatics(layout
-/*: Layout*/
-)
-/*: Array<LayoutItem>*/
-{
+function getStatics(layout /*: Layout*/) /*: Array<LayoutItem>*/ {
   //return [];
   return layout.filter(function (l) {
     return l.static;
   });
 }
+
 /**
  * Move an element. Responsible for doing cascading movements of other elements.
  *
@@ -3693,66 +4521,60 @@ function getStatics(layout
  * @param  {Number}     [y]    Y position in grid units.
  * @param  {Boolean}    [isUserAction] If true, designates that the item we're moving is
  *                                     being dragged/resized by th euser.
+ * @param cover 是否可拖拽到已存在网格区域
+ * @param preventCollision
  */
+function moveElement(layout /*: Layout*/, l /*: LayoutItem*/, x /*: Number*/, y /*: Number*/, isUserAction /*: Boolean*/, cover /*:Boolean*/, preventCollision /*: Boolean*/) /*: Layout*/ {
+  if (l.static) return layout;
 
-function moveElement(layout
-/*: Layout*/
-, l
-/*: LayoutItem*/
-, x
-/*: Number*/
-, y
-/*: Number*/
-, isUserAction
-/*: Boolean*/
-, preventCollision
-/*: Boolean*/
-)
-/*: Layout*/
-{
-  if (l.static) return layout; // Short-circuit if nothing to do.
+  // Short-circuit if nothing to do.
   //if (l.y === y && l.x === x) return layout;
 
   var oldX = l.x;
   var oldY = l.y;
-  var movingUp = y && l.y > y; // This is quite a bit faster than extending the object
-
+  var movingUp = y && l.y > y;
+  // This is quite a bit faster than extending the object
   if (typeof x === 'number') l.x = x;
   if (typeof y === 'number') l.y = y;
-  l.moved = true; // If this collides with anything, move it.
+  l.moved = true;
+
+  // If this collides with anything, move it.
   // When doing this comparison, we have to sort the items we compare with
   // to ensure, in the case of multiple collisions, that we're getting the
   // nearest collision.
-
   var sorted = sortLayoutItemsByRowCol(layout);
   if (movingUp) sorted = sorted.reverse();
   var collisions = getAllCollisions(sorted, l);
-
   if (preventCollision && collisions.length) {
     l.x = oldX;
     l.y = oldY;
     l.moved = false;
     return layout;
-  } // Move each item that collides away from this element.
-
-
-  for (var i = 0, len = collisions.length; i < len; i++) {
-    var collision = collisions[i]; // console.log('resolving collision between', l.i, 'at', l.y, 'and', collision.i, 'at', collision.y);
-    // Short circuit so we can't infinite loop
-
-    if (collision.moved) continue; // This makes it feel a bit more precise by waiting to swap for just a bit when moving up.
-
-    if (l.y > collision.y && l.y - collision.y > collision.h / 4) continue; // Don't move static items - we have to move *this* element away
-
-    if (collision.static) {
-      layout = moveElementAwayFromCollision(layout, collision, l, isUserAction);
-    } else {
-      layout = moveElementAwayFromCollision(layout, l, collision, isUserAction);
-    }
   }
 
+  // Move each item that collides away from this element.
+  if (!cover) {
+    for (var i = 0, len = collisions.length; i < len; i++) {
+      var collision = collisions[i];
+      // console.log('resolving collision between', l.i, 'at', l.y, 'and', collision.i, 'at', collision.y);
+
+      // Short circuit so we can't infinite loop
+      if (collision.moved) continue;
+
+      // This makes it feel a bit more precise by waiting to swap for just a bit when moving up.
+      if (l.y > collision.y && l.y - collision.y > collision.h / 4) continue;
+
+      // Don't move static items - we have to move *this* element away
+      if (collision.static) {
+        layout = moveElementAwayFromCollision(layout, collision, l, isUserAction);
+      } else {
+        layout = moveElementAwayFromCollision(layout, l, collision, isUserAction);
+      }
+    }
+  }
   return layout;
 }
+
 /**
  * This is where the magic needs to happen - given a collision, move an element away from the collision.
  * We attempt to move it up if there's room, otherwise it goes below.
@@ -3763,28 +4585,14 @@ function moveElement(layout
  * @param  {Boolean} [isUserAction]  If true, designates that the item we're moving is being dragged/resized
  *                                   by the user.
  */
-
-function moveElementAwayFromCollision(layout
-/*: Layout*/
-, collidesWith
-/*: LayoutItem*/
-, itemToMove
-/*: LayoutItem*/
-, isUserAction
-/*: ?boolean*/
-)
-/*: Layout*/
-{
+function moveElementAwayFromCollision(layout /*: Layout*/, collidesWith /*: LayoutItem*/, itemToMove /*: LayoutItem*/, isUserAction /*: ?boolean*/) /*: Layout*/ {
   var preventCollision = false; // we're already colliding
   // If there is enough space above the collision to put this element, move it there.
   // We only do this on the main collision as this can get funky in cascades and cause
   // unwanted swapping behavior.
-
   if (isUserAction) {
     // Make a mock item so we don't modify the item here, only modify in moveElement.
-    var fakeItem
-    /*: LayoutItem*/
-    = {
+    var fakeItem /*: LayoutItem*/ = {
       x: itemToMove.x,
       y: itemToMove.y,
       w: itemToMove.w,
@@ -3792,33 +4600,26 @@ function moveElementAwayFromCollision(layout
       i: '-1'
     };
     fakeItem.y = Math.max(collidesWith.y - itemToMove.h, 0);
-
     if (!getFirstCollision(layout, fakeItem)) {
       return moveElement(layout, itemToMove, undefined, fakeItem.y, preventCollision);
     }
-  } // Previously this was optimized to move below the collision directly, but this can cause problems
+  }
+
+  // Previously this was optimized to move below the collision directly, but this can cause problems
   // with cascading moves, as an item may actually leapflog a collision and cause a reversal in order.
-
-
   return moveElement(layout, itemToMove, undefined, itemToMove.y + 1, preventCollision);
 }
+
 /**
  * Helper to convert a number to a percentage string.
  *
  * @param  {Number} num Any number
  * @return {String}     That number as a percentage.
  */
-
-function perc(num
-/*: number*/
-)
-/*: string*/
-{
+function perc(num /*: number*/) /*: string*/ {
   return num * 100 + '%';
 }
-function setTransform(top, left, width, height)
-/*: Object*/
-{
+function setTransform(top, left, width, height) /*: Object*/ {
   // Replace unitless items with px
   var translate = "translate3d(" + left + "px," + top + "px, 0)";
   return {
@@ -3841,10 +4642,7 @@ function setTransform(top, left, width, height)
  * @param height
  * @returns {{transform: string, WebkitTransform: string, MozTransform: string, msTransform: string, OTransform: string, width: string, height: string, position: string}}
  */
-
-function setTransformRtl(top, right, width, height)
-/*: Object*/
-{
+function setTransformRtl(top, right, width, height) /*: Object*/ {
   // Replace unitless items with px
   var translate = "translate3d(" + right * -1 + "px," + top + "px, 0)";
   return {
@@ -3858,9 +4656,7 @@ function setTransformRtl(top, right, width, height)
     position: 'absolute'
   };
 }
-function setTopLeft(top, left, width, height)
-/*: Object*/
-{
+function setTopLeft(top, left, width, height) /*: Object*/ {
   return {
     top: top + "px",
     left: left + "px",
@@ -3878,10 +4674,7 @@ function setTopLeft(top, left, width, height)
  * @param height
  * @returns {{top: string, right: string, width: string, height: string, position: string}}
  */
-
-function setTopRight(top, right, width, height)
-/*: Object*/
-{
+function setTopRight(top, right, width, height) /*: Object*/ {
   return {
     top: top + "px",
     right: right + "px",
@@ -3890,30 +4683,25 @@ function setTopRight(top, right, width, height)
     position: 'absolute'
   };
 }
+
 /**
  * Get layout items sorted from top left to right and down.
  *
  * @return {Array} Array of layout objects.
  * @return {Array}        Layout, sorted static items first.
  */
-
-function sortLayoutItemsByRowCol(layout
-/*: Layout*/
-)
-/*: Layout*/
-{
+function sortLayoutItemsByRowCol(layout /*: Layout*/) /*: Layout*/ {
   return [].concat(layout).sort(function (a, b) {
     if (a.y === b.y && a.x === b.x) {
       return 0;
     }
-
     if (a.y > b.y || a.y === b.y && a.x > b.x) {
       return 1;
     }
-
     return -1;
   });
 }
+
 /**
  * Generate a layout using the initialLayout and children as a template.
  * Missing entries will be added, extraneous ones will be truncated.
@@ -3923,7 +4711,6 @@ function sortLayoutItemsByRowCol(layout
  * @param  {Boolean} verticalCompact Whether or not to compact the layout vertically.
  * @return {Array}                Working layout.
  */
-
 /*
 export function synchronizeLayoutWithChildren(initialLayout: Layout, children: Array<React.Element>|React.Element,
                                               cols: number, verticalCompact: boolean): Layout {
@@ -3982,82 +4769,61 @@ export function synchronizeLayoutWithChildren(initialLayout: Layout, children: A
  * @param  {String} [contextName] Context name for errors.
  * @throw  {Error}                Validation error.
  */
-
-function validateLayout(layout
-/*: Layout*/
-, contextName
-/*: string*/
-)
-/*: void*/
-{
+function validateLayout(layout /*: Layout*/, contextName /*: string*/) /*: void*/ {
   contextName = contextName || "Layout";
   var subProps = ['x', 'y', 'w', 'h'];
   var keyArr = [];
   if (!Array.isArray(layout)) throw new Error(contextName + " must be an array!");
-
   for (var i = 0, len = layout.length; i < len; i++) {
     var item = layout[i];
-
     for (var j = 0; j < subProps.length; j++) {
       if (typeof item[subProps[j]] !== 'number') {
         throw new Error('VueGridLayout: ' + contextName + '[' + i + '].' + subProps[j] + ' must be a number!');
       }
     }
-
     if (item.i === undefined || item.i === null) {
       throw new Error('VueGridLayout: ' + contextName + '[' + i + '].i cannot be null!');
     }
-
     if (typeof item.i !== 'number' && typeof item.i !== 'string') {
       throw new Error('VueGridLayout: ' + contextName + '[' + i + '].i must be a string or number!');
     }
-
     if (keyArr.indexOf(item.i) >= 0) {
       throw new Error('VueGridLayout: ' + contextName + '[' + i + '].i must be unique!');
     }
-
     keyArr.push(item.i);
-
     if (item.static !== undefined && typeof item.static !== 'boolean') {
       throw new Error('VueGridLayout: ' + contextName + '[' + i + '].static must be a boolean!');
     }
   }
-} // Flow can't really figure this out, so we just use Object
+}
 
-function autoBindHandlers(el
-/*: Object*/
-, fns
-/*: Array<string>*/
-)
-/*: void*/
-{
+// Flow can't really figure this out, so we just use Object
+function autoBindHandlers(el /*: Object*/, fns /*: Array<string>*/) /*: void*/ {
   fns.forEach(function (key) {
     return el[key] = el[key].bind(el);
   });
 }
+
 /**
  * Convert a JS object to CSS string. Similar to React's output of CSS.
  * @param obj
  * @returns {string}
  */
-
 function createMarkup(obj) {
   var keys = Object.keys(obj);
   if (!keys.length) return '';
   var i,
-      len = keys.length;
+    len = keys.length;
   var result = '';
-
   for (i = 0; i < len; i++) {
     var key = keys[i];
     var val = obj[key];
     result += hyphenate(key) + ':' + addPx(key, val) + ';';
   }
-
   return result;
 }
-/* The following list is defined in React's core */
 
+/* The following list is defined in React's core */
 var IS_UNITLESS = {
   animationIterationCount: true,
   boxFlex: true,
@@ -4089,13 +4855,13 @@ var IS_UNITLESS = {
   strokeOpacity: true,
   strokeWidth: true
 };
+
 /**
  * Will add px to the end of style values which are Numbers.
  * @param name
  * @param value
  * @returns {*}
  */
-
 function addPx(name, value) {
   if (typeof value === 'number' && !IS_UNITLESS[name]) {
     return value + 'px';
@@ -4103,6 +4869,7 @@ function addPx(name, value) {
     return value;
   }
 }
+
 /**
  * Hyphenate a camelCase string.
  *
@@ -4115,10 +4882,7 @@ function hyphenate(str) {
   return str.replace(hyphenateRE, '$1-$2').toLowerCase();
 }
 function findItemInArray(array, property, value) {
-  for (var i = 0; i < array.length; i++) {
-    if (array[i][property] == value) return true;
-  }
-
+  for (var i = 0; i < array.length; i++) if (array[i][property] == value) return true;
   return false;
 }
 function findAndRemove(array, property, value) {
@@ -4410,40 +5174,18 @@ for (var collections = getKeys(DOMIterables), i = 0; i < collections.length; i++
 
 /***/ }),
 
-/***/ "ad20":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "aebd":
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__("2350")(false);
-// imports
+module.exports = function (bitmap, value) {
+  return {
+    enumerable: !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable: !(bitmap & 4),
+    value: value
+  };
+};
 
-
-// module
-exports.push([module.i, ".vue-grid-layout{position:relative;-webkit-transition:height .2s ease;transition:height .2s ease}", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "ade3":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _defineProperty; });
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
 
 /***/ }),
 
@@ -4460,6 +5202,34 @@ __webpack_require__("5ca1")({
 }, {
   exec: regexpExec
 });
+
+
+/***/ }),
+
+/***/ "b447":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 7.1.15 ToLength
+var toInteger = __webpack_require__("3a38");
+var min = Math.min;
+module.exports = function (it) {
+  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+};
+
+
+/***/ }),
+
+/***/ "b701":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("2350")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".vue-grid-layout{position:relative;-webkit-transition:height .2s ease;transition:height .2s ease}", ""]);
+
+// exports
 
 
 /***/ }),
@@ -4491,6 +5261,14 @@ utils.forEach = function(collection, callback) {
 
 /***/ }),
 
+/***/ "b8e3":
+/***/ (function(module, exports) {
+
+module.exports = true;
+
+
+/***/ }),
+
 /***/ "bc21":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4503,12 +5281,23 @@ __webpack_require__.d(all_namespaceObject, "edgeTarget", function() { return edg
 __webpack_require__.d(all_namespaceObject, "elements", function() { return snappers_elements; });
 __webpack_require__.d(all_namespaceObject, "grid", function() { return grid; });
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1705dc22-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GridItem.vue?vue&type=template&id=e7489122&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"item",staticClass:"vue-grid-item",class:_vm.classObj,style:(_vm.style)},[_vm._t("default"),(_vm.resizableAndNotStatic)?_c('span',{ref:"handle",class:_vm.resizableHandleClass}):_vm._e()],2)}
-var staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"38e7a346-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GridItem.vue?vue&type=template&id=e7489122
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    ref: "item",
+    staticClass: "vue-grid-item",
+    class: _vm.classObj,
+    style: _vm.style
+  }, [_vm._t("default"), _vm.resizableAndNotStatic ? _c('span', {
+    ref: "handle",
+    class: _vm.resizableHandleClass
+  }) : _vm._e()], 2);
+};
+var staticRenderFns = [];
 
-
-// CONCATENATED MODULE: ./src/components/GridItem.vue?vue&type=template&id=e7489122&
+// CONCATENATED MODULE: ./src/components/GridItem.vue?vue&type=template&id=e7489122
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.get-own-property-descriptors.js
 var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
@@ -4516,17 +5305,14 @@ var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom.iterable.js
 var web_dom_iterable = __webpack_require__("ac6a");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.iterator.js
-var es6_array_iterator = __webpack_require__("cadf");
-
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.keys.js
 var es6_object_keys = __webpack_require__("456d");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
 var es6_regexp_replace = __webpack_require__("a481");
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
-var defineProperty = __webpack_require__("ade3");
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js + 3 modules
+var defineProperty = __webpack_require__("bd86");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.number.is-finite.js
 var es6_number_is_finite = __webpack_require__("fca0");
@@ -4544,8 +5330,9 @@ var utils = __webpack_require__("a2b6");
 // Get {x, y} positions from event.
 function getControlPosition(e) {
   return offsetXYFromParentOf(e);
-} // Get from offsetParent
+}
 
+// Get from offsetParent
 function offsetXYFromParentOf(evt) {
   var offsetParent = evt.target.offsetParent || document.body;
   var offsetParentRect = evt.offsetParent === document.body ? {
@@ -4554,6 +5341,7 @@ function offsetXYFromParentOf(evt) {
   } : offsetParent.getBoundingClientRect();
   var x = evt.clientX + offsetParent.scrollLeft - offsetParentRect.left;
   var y = evt.clientY + offsetParent.scrollTop - offsetParentRect.top;
+
   /*const x = Math.round(evt.clientX + offsetParent.scrollLeft - offsetParentRect.left);
   const y = Math.round(evt.clientY + offsetParent.scrollTop - offsetParentRect.top);*/
 
@@ -4561,12 +5349,12 @@ function offsetXYFromParentOf(evt) {
     x: x,
     y: y
   };
-} // Create an data object exposed by <DraggableCore>'s events
+}
 
+// Create an data object exposed by <DraggableCore>'s events
 function createCoreData(lastX, lastY, x, y) {
   // State changes are often (but not always!) async. We want the latest value.
   var isStart = !isNum(lastX);
-
   if (isStart) {
     // If this is our first move, use the x and y as last coords.
     return {
@@ -4589,7 +5377,6 @@ function createCoreData(lastX, lastY, x, y) {
     };
   }
 }
-
 function isNum(num) {
   return typeof num === 'number' && !isNaN(num);
 }
@@ -11424,7 +12211,7 @@ if (typeof window === 'object' && !!window) {
 
 _interactjs_interact.use(dev_tools_plugin);
 //# sourceMappingURL=index.js.map
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GridItem.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GridItem.vue?vue&type=script&lang=js
 
 
 
@@ -11433,103 +12220,13 @@ _interactjs_interact.use(dev_tools_plugin);
 
 
 
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { Object(defineProperty["a" /* default */])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { Object(defineProperty["a" /* default */])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 
 
 
- //    var eventBus = require('./eventBus');
+
+//    var eventBus = require('./eventBus');
 
 
 
@@ -11538,18 +12235,17 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
-/* harmony default export */ var GridItemvue_type_script_lang_js_ = ({
+/* harmony default export */ var GridItemvue_type_script_lang_js = ({
   name: "GridItem",
   props: {
     /*cols: {
      type: Number,
      required: true
      },*/
-
     /*containerWidth: {
      type: Number,
      required: true
-       },
+      },
      rowHeight: {
      type: Number,
      required: true
@@ -11577,7 +12273,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
       required: false,
       default: null
     },
-
     /*useCssTransforms: {
      type: Boolean,
      required: true
@@ -11699,57 +12394,46 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
   },
   created: function created() {
     var _this = this;
+    var self = this;
 
-    var self = this; // Accessible refernces of functions for removing in beforeDestroy
-
+    // Accessible refernces of functions for removing in beforeDestroy
     self.updateWidthHandler = function (width) {
       self.updateWidth(width);
     };
-
     self.compactHandler = function (layout) {
       self.compact(layout);
     };
-
     self.setDraggableHandler = function (isDraggable) {
       if (self.isDraggable === null) {
         self.draggable = isDraggable;
       }
     };
-
     self.setResizableHandler = function (isResizable) {
       if (self.isResizable === null) {
         self.resizable = isResizable;
       }
     };
-
     self.setBoundedHandler = function (isBounded) {
       if (self.isBounded === null) {
         self.bounded = isBounded;
       }
     };
-
     self.setTransformScaleHandler = function (transformScale) {
       self.transformScale = transformScale;
     };
-
     self.setRowHeightHandler = function (rowHeight) {
       self.rowHeight = rowHeight;
     };
-
     self.setMaxRowsHandler = function (maxRows) {
       self.maxRows = maxRows;
     };
-
     self.directionchangeHandler = function () {
       _this.rtl = Object(DOM["b" /* getDocumentDir */])() === 'rtl';
-
       _this.compact();
     };
-
     self.setColNum = function (colNum) {
       self.cols = parseInt(colNum);
     };
-
     this.eventBus.$on('updateWidth', self.updateWidthHandler);
     this.eventBus.$on('compact', self.compactHandler);
     this.eventBus.$on('setDraggable', self.setDraggableHandler);
@@ -11763,8 +12447,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
     this.rtl = Object(DOM["b" /* getDocumentDir */])() === 'rtl';
   },
   beforeDestroy: function beforeDestroy() {
-    var self = this; //Remove listeners
-
+    var self = this;
+    //Remove listeners
     this.eventBus.$off('updateWidth', self.updateWidthHandler);
     this.eventBus.$off('compact', self.compactHandler);
     this.eventBus.$off('setDraggable', self.setDraggableHandler);
@@ -11775,41 +12459,36 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
     this.eventBus.$off('setMaxRows', self.setMaxRowsHandler);
     this.eventBus.$off('directionchange', self.directionchangeHandler);
     this.eventBus.$off('setColNum', self.setColNum);
-
     if (this.interactObj) {
       this.interactObj.unset(); // destroy interact intance
     }
   },
+
   mounted: function mounted() {
     if (this.layout.responsive && this.layout.lastBreakpoint) {
       this.cols = Object(responsiveUtils["c" /* getColsFromBreakpoint */])(this.layout.lastBreakpoint, this.layout.cols);
     } else {
       this.cols = this.layout.colNum;
     }
-
     this.rowHeight = this.layout.rowHeight;
     this.containerWidth = this.layout.width !== null ? this.layout.width : 100;
     this.margin = this.layout.margin !== undefined ? this.layout.margin : [10, 10];
     this.maxRows = this.layout.maxRows;
-
     if (this.isDraggable === null) {
       this.draggable = this.layout.isDraggable;
     } else {
       this.draggable = this.isDraggable;
     }
-
     if (this.isResizable === null) {
       this.resizable = this.layout.isResizable;
     } else {
       this.resizable = this.isResizable;
     }
-
     if (this.isBounded === null) {
       this.bounded = this.layout.isBounded;
     } else {
       this.bounded = this.isBounded;
     }
-
     this.transformScale = this.layout.transformScale;
     this.useCssTransforms = this.layout.useCssTransforms;
     this.useStyleCursor = this.layout.useStyleCursor;
@@ -11859,12 +12538,16 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
     },
     h: function h(newVal) {
       this.innerH = newVal;
-      this.createStyle(); // this.emitContainerResized();
+      this.createStyle();
+      // this.emitContainerResized();
     },
+
     w: function w(newVal) {
       this.innerW = newVal;
-      this.createStyle(); // this.emitContainerResized();
+      this.createStyle();
+      // this.emitContainerResized();
     },
+
     renderRtl: function renderRtl() {
       // console.log("### renderRtl");
       this.tryMakeResizable();
@@ -11886,7 +12569,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
       if (!margin || margin[0] == this.margin[0] && margin[1] == this.margin[1]) {
         return;
       }
-
       this.margin = margin.map(function (m) {
         return Number(m);
       });
@@ -11936,26 +12618,22 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
         this.innerX = this.x;
         this.innerW = this.w;
       }
-
       var pos = this.calcPosition(this.innerX, this.innerY, this.innerW, this.innerH);
-
       if (this.isDragging) {
-        pos.top = this.dragging.top; //                    Add rtl support
-
+        pos.top = this.dragging.top;
+        //                    Add rtl support
         if (this.renderRtl) {
           pos.right = this.dragging.left;
         } else {
           pos.left = this.dragging.left;
         }
       }
-
       if (this.isResizing) {
         pos.width = this.resizing.width;
         pos.height = this.resizing.height;
       }
-
-      var style; // CSS Transforms support (default)
-
+      var style;
+      // CSS Transforms support (default)
       if (this.useCssTransforms) {
         //                    Add rtl support
         if (this.renderRtl) {
@@ -11972,14 +12650,12 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
           style = Object(utils["h" /* setTopLeft */])(pos.top, pos.left, pos.width, pos.height);
         }
       }
-
       this.style = style;
     },
     emitContainerResized: function emitContainerResized() {
       // this.style has width and height with trailing 'px'. The
       // resized event is without them
       var styleProps = {};
-
       for (var _i = 0, _arr = ['width', 'height']; _i < _arr.length; _i++) {
         var prop = _arr[_i];
         var val = this.style[prop];
@@ -11987,23 +12663,20 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
         if (!matches) return;
         styleProps[prop] = matches[1];
       }
-
       this.$emit("container-resized", this.i, this.h, this.w, styleProps.height, styleProps.width);
     },
     handleResize: function handleResize(event) {
       if (this.static) return;
-      var position = getControlPosition(event); // Get the current drag point from the event. This is used as the offset.
-
+      var position = getControlPosition(event);
+      // Get the current drag point from the event. This is used as the offset.
       if (position == null) return; // not possible but satisfies flow
-
       var x = position.x,
-          y = position.y;
+        y = position.y;
       var newSize = {
         width: 0,
         height: 0
       };
       var pos;
-
       switch (event.type) {
         case "resizestart":
           {
@@ -12017,92 +12690,79 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
             this.isResizing = true;
             break;
           }
-
         case "resizemove":
           {
             //                        console.log("### resize => " + event.type + ", lastW=" + this.lastW + ", lastH=" + this.lastH);
             var coreEvent = createCoreData(this.lastW, this.lastH, x, y);
-
             if (this.renderRtl) {
               newSize.width = this.resizing.width - coreEvent.deltaX / this.transformScale;
             } else {
               newSize.width = this.resizing.width + coreEvent.deltaX / this.transformScale;
             }
+            newSize.height = this.resizing.height + coreEvent.deltaY / this.transformScale;
 
-            newSize.height = this.resizing.height + coreEvent.deltaY / this.transformScale; ///console.log("### resize => " + event.type + ", deltaX=" + coreEvent.deltaX + ", deltaY=" + coreEvent.deltaY);
-
+            ///console.log("### resize => " + event.type + ", deltaX=" + coreEvent.deltaX + ", deltaY=" + coreEvent.deltaY);
             this.resizing = newSize;
             break;
           }
-
         case "resizeend":
           {
             //console.log("### resize end => x=" +this.innerX + " y=" + this.innerY + " w=" + this.innerW + " h=" + this.innerH);
             pos = this.calcPosition(this.innerX, this.innerY, this.innerW, this.innerH);
             newSize.width = pos.width;
-            newSize.height = pos.height; //                        console.log("### resize end => " + JSON.stringify(newSize));
-
+            newSize.height = pos.height;
+            //                        console.log("### resize end => " + JSON.stringify(newSize));
             this.resizing = null;
             this.isResizing = false;
             break;
           }
-      } // Get new WH
+      }
 
-
+      // Get new WH
       pos = this.calcWH(newSize.height, newSize.width);
-
       if (pos.w < this.minW) {
         pos.w = this.minW;
       }
-
       if (pos.w > this.maxW) {
         pos.w = this.maxW;
       }
-
       if (pos.h < this.minH) {
         pos.h = this.minH;
       }
-
       if (pos.h > this.maxH) {
         pos.h = this.maxH;
       }
-
       if (pos.h < 1) {
         pos.h = 1;
       }
-
       if (pos.w < 1) {
         pos.w = 1;
       }
-
       this.lastW = x;
       this.lastH = y;
-
       if (this.innerW !== pos.w || this.innerH !== pos.h) {
         this.$emit("resize", this.i, pos.h, pos.w, newSize.height, newSize.width);
       }
-
       if (event.type === "resizeend" && (this.previousW !== this.innerW || this.previousH !== this.innerH)) {
         this.$emit("resized", this.i, pos.h, pos.w, newSize.height, newSize.width);
       }
-
       this.eventBus.$emit("resizeEvent", event.type, this.i, this.innerX, this.innerY, pos.h, pos.w);
     },
     handleDrag: function handleDrag(event) {
       if (this.static) return;
       if (this.isResizing) return;
-      var position = getControlPosition(event); // Get the current drag point from the event. This is used as the offset.
+      var position = getControlPosition(event);
 
+      // Get the current drag point from the event. This is used as the offset.
       if (position === null) return; // not possible but satisfies flow
-
       var x = position.x,
-          y = position.y; // let shouldUpdate = false;
+        y = position.y;
 
+      // let shouldUpdate = false;
       var newPosition = {
         top: 0,
         left: 0
       };
-
       switch (event.type) {
         case "dragstart":
           {
@@ -12116,110 +12776,88 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
             var pRight = parentRect.right / this.transformScale;
             var cTop = clientRect.top / this.transformScale;
             var pTop = parentRect.top / this.transformScale;
-
             if (this.renderRtl) {
               newPosition.left = (cRight - pRight) * -1;
             } else {
               newPosition.left = cLeft - pLeft;
             }
-
             newPosition.top = cTop - pTop;
             this.dragging = newPosition;
             this.isDragging = true;
             break;
           }
-
         case "dragend":
           {
             if (!this.isDragging) return;
-
             var _parentRect = event.target.offsetParent.getBoundingClientRect();
-
             var _clientRect = event.target.getBoundingClientRect();
-
             var _cLeft = _clientRect.left / this.transformScale;
-
             var _pLeft = _parentRect.left / this.transformScale;
-
             var _cRight = _clientRect.right / this.transformScale;
-
             var _pRight = _parentRect.right / this.transformScale;
-
             var _cTop = _clientRect.top / this.transformScale;
+            var _pTop = _parentRect.top / this.transformScale;
 
-            var _pTop = _parentRect.top / this.transformScale; //                        Add rtl support
-
-
+            //                        Add rtl support
             if (this.renderRtl) {
               newPosition.left = (_cRight - _pRight) * -1;
             } else {
               newPosition.left = _cLeft - _pLeft;
             }
-
-            newPosition.top = _cTop - _pTop; //                        console.log("### drag end => " + JSON.stringify(newPosition));
+            newPosition.top = _cTop - _pTop;
+            //                        console.log("### drag end => " + JSON.stringify(newPosition));
             //                        console.log("### DROP: " + JSON.stringify(newPosition));
-
             this.dragging = null;
-            this.isDragging = false; // shouldUpdate = true;
-
+            this.isDragging = false;
+            // shouldUpdate = true;
             break;
           }
-
         case "dragmove":
           {
-            var coreEvent = createCoreData(this.lastX, this.lastY, x, y); //                        Add rtl support
-
+            var coreEvent = createCoreData(this.lastX, this.lastY, x, y);
+            //                        Add rtl support
             if (this.renderRtl) {
               newPosition.left = this.dragging.left - coreEvent.deltaX / this.transformScale;
             } else {
               newPosition.left = this.dragging.left + coreEvent.deltaX / this.transformScale;
             }
-
             newPosition.top = this.dragging.top + coreEvent.deltaY / this.transformScale;
-
             if (this.bounded) {
               var bottomBoundary = event.target.offsetParent.clientHeight - this.calcGridItemWHPx(this.h, this.rowHeight, this.margin[1]);
               newPosition.top = this.clamp(newPosition.top, 0, bottomBoundary);
               var colWidth = this.calcColWidth();
               var rightBoundary = this.containerWidth - this.calcGridItemWHPx(this.w, colWidth, this.margin[0]);
               newPosition.left = this.clamp(newPosition.left, 0, rightBoundary);
-            } //                        console.log("### drag => " + event.type + ", x=" + x + ", y=" + y);
+            }
+            //                        console.log("### drag => " + event.type + ", x=" + x + ", y=" + y);
             //                        console.log("### drag => " + event.type + ", deltaX=" + coreEvent.deltaX + ", deltaY=" + coreEvent.deltaY);
             //                        console.log("### drag end => " + JSON.stringify(newPosition));
-
-
             this.dragging = newPosition;
             break;
           }
-      } // Get new XY
+      }
 
-
+      // Get new XY
       var pos;
-
       if (this.renderRtl) {
         pos = this.calcXY(newPosition.top, newPosition.left);
       } else {
         pos = this.calcXY(newPosition.top, newPosition.left);
       }
-
       this.lastX = x;
       this.lastY = y;
-
       if (this.innerX !== pos.x || this.innerY !== pos.y) {
         this.$emit("move", this.i, pos.x, pos.y);
       }
-
       if (event.type === "dragend" && (this.previousX !== this.innerX || this.previousY !== this.innerY)) {
         this.$emit("moved", this.i, pos.x, pos.y);
       }
-
       this.eventBus.$emit("dragEvent", event.type, this.i, pos.x, pos.y, this.innerH, this.innerW);
     },
     calcPosition: function calcPosition(x, y, w, h) {
-      var colWidth = this.calcColWidth(); // add rtl support
-
+      var colWidth = this.calcColWidth();
+      // add rtl support
       var out;
-
       if (this.renderRtl) {
         out = {
           right: Math.round(colWidth * x + (x + 1) * this.margin[0]),
@@ -12241,10 +12879,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
           height: h === Infinity ? h : Math.round(this.rowHeight * h + Math.max(0, h - 1) * this.margin[1])
         };
       }
-
       return out;
     },
-
     /**
      * Translate x and y coordinates from pixels to grid units.
      * @param  {Number} top  Top position (relative to parent) in pixels.
@@ -12253,17 +12889,19 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
      */
     // TODO check if this function needs change in order to support rtl.
     calcXY: function calcXY(top, left) {
-      var colWidth = this.calcColWidth(); // left = colWidth * x + margin * (x + 1)
+      var colWidth = this.calcColWidth();
+
+      // left = colWidth * x + margin * (x + 1)
       // l = cx + m(x+1)
       // l = cx + mx + m
       // l - m = cx + mx
       // l - m = x(c + m)
       // (l - m) / (c + m) = x
       // x = (left - margin) / (coldWidth + margin)
-
       var x = Math.round((left - this.margin[0]) / (colWidth + this.margin[0]));
-      var y = Math.round((top - this.margin[1]) / (this.rowHeight + this.margin[1])); // Capping
+      var y = Math.round((top - this.margin[1]) / (this.rowHeight + this.margin[1]));
 
+      // Capping
       x = Math.max(Math.min(x, this.cols - this.innerW), 0);
       y = Math.max(Math.min(y, this.maxRows - this.innerH), 0);
       return {
@@ -12273,8 +12911,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
     },
     // Helper for generating column width
     calcColWidth: function calcColWidth() {
-      var colWidth = (this.containerWidth - this.margin[0] * (this.cols + 1)) / this.cols; // console.log("### COLS=" + this.cols + " COL WIDTH=" + colWidth + " MARGIN " + this.margin[0]);
-
+      var colWidth = (this.containerWidth - this.margin[0] * (this.cols + 1)) / this.cols;
+      // console.log("### COLS=" + this.cols + " COL WIDTH=" + colWidth + " MARGIN " + this.margin[0]);
       return colWidth;
     },
     // This can either be called:
@@ -12290,7 +12928,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
     clamp: function clamp(num, lowerBound, upperBound) {
       return Math.max(Math.min(num, upperBound), lowerBound);
     },
-
     /**
      * Given a height and width in pixel values, calculate grid units.
      * @param  {Number} height Height in pixels.
@@ -12300,20 +12937,20 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
      */
     calcWH: function calcWH(height, width) {
       var autoSizeFlag = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-      var colWidth = this.calcColWidth(); // width = colWidth * w - (margin * (w - 1))
+      var colWidth = this.calcColWidth();
+
+      // width = colWidth * w - (margin * (w - 1))
       // ...
       // w = (width + margin) / (colWidth + margin)
-
       var w = Math.round((width + this.margin[0]) / (colWidth + this.margin[0]));
       var h = 0;
-
       if (!autoSizeFlag) {
         h = Math.round((height + this.margin[1]) / (this.rowHeight + this.margin[1]));
       } else {
         h = Math.ceil((height + this.margin[1]) / (this.rowHeight + this.margin[1]));
-      } // Capping
+      }
 
-
+      // Capping
       w = Math.max(Math.min(w, this.cols - this.innerX), 0);
       h = Math.max(Math.min(h, this.maxRows - this.innerY), 0);
       return {
@@ -12323,7 +12960,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
     },
     updateWidth: function updateWidth(width, colNum) {
       this.containerWidth = width;
-
       if (colNum !== undefined && colNum !== null) {
         this.cols = colNum;
       }
@@ -12333,24 +12969,19 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
     },
     tryMakeDraggable: function tryMakeDraggable() {
       var self = this;
-
       if (this.interactObj === null || this.interactObj === undefined) {
         this.interactObj = _interactjs_interact(this.$refs.item);
-
         if (!this.useStyleCursor) {
           this.interactObj.styleCursor(false);
         }
       }
-
       if (this.draggable && !this.static) {
         var opts = _objectSpread({
           ignoreFrom: this.dragIgnoreFrom,
           allowFrom: this.dragAllowFrom
         }, this.dragOption);
-
         this.interactObj.draggable(opts);
         /*this.interactObj.draggable({allowFrom: '.vue-draggable-handle'});*/
-
         if (!this.dragEventSet) {
           this.dragEventSet = true;
           this.interactObj.on('dragstart dragmove dragend', function (event) {
@@ -12365,18 +12996,17 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
     },
     tryMakeResizable: function tryMakeResizable() {
       var self = this;
-
       if (this.interactObj === null || this.interactObj === undefined) {
         this.interactObj = _interactjs_interact(this.$refs.item);
-
         if (!this.useStyleCursor) {
           this.interactObj.styleCursor(false);
         }
       }
-
       if (this.resizable && !this.static) {
         var maximum = this.calcPosition(0, 0, this.maxW, this.maxH);
-        var minimum = this.calcPosition(0, 0, this.minW, this.minH); // console.log("### MAX " + JSON.stringify(maximum));
+        var minimum = this.calcPosition(0, 0, this.minW, this.minH);
+
+        // console.log("### MAX " + JSON.stringify(maximum));
         // console.log("### MIN " + JSON.stringify(minimum));
 
         var opts = _objectSpread({
@@ -12399,15 +13029,12 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
             }
           }
         }, this.resizeOption);
-
         if (this.preserveAspectRatio) {
           opts.modifiers = [_interactjs_interact.modifiers.aspectRatio({
             ratio: 'preserve'
           })];
         }
-
         this.interactObj.resizable(opts);
-
         if (!this.resizeEventSet) {
           this.resizeEventSet = true;
           this.interactObj.on('resizestart resizemove resizeend', function (event) {
@@ -12426,37 +13053,31 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
       this.previousH = this.innerH;
       var newSize = this.$slots.default[0].elm.getBoundingClientRect();
       var pos = this.calcWH(newSize.height, newSize.width, true);
-
       if (pos.w < this.minW) {
         pos.w = this.minW;
       }
-
       if (pos.w > this.maxW) {
         pos.w = this.maxW;
       }
-
       if (pos.h < this.minH) {
         pos.h = this.minH;
       }
-
       if (pos.h > this.maxH) {
         pos.h = this.maxH;
       }
-
       if (pos.h < 1) {
         pos.h = 1;
       }
-
       if (pos.w < 1) {
         pos.w = 1;
-      } // this.lastW = x; // basically, this is copied from resizehandler, but shouldn't be needed
-      // this.lastH = y;
+      }
 
+      // this.lastW = x; // basically, this is copied from resizehandler, but shouldn't be needed
+      // this.lastH = y;
 
       if (this.innerW !== pos.w || this.innerH !== pos.h) {
         this.$emit("resize", this.i, pos.h, pos.w, newSize.height, newSize.width);
       }
-
       if (this.previousW !== pos.w || this.previousH !== pos.h) {
         this.$emit("resized", this.i, pos.h, pos.w, newSize.height, newSize.width);
         this.eventBus.$emit("resizeEvent", "resizeend", this.i, this.innerX, this.innerY, pos.h, pos.w);
@@ -12464,10 +13085,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
     }
   }
 });
-// CONCATENATED MODULE: ./src/components/GridItem.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_GridItemvue_type_script_lang_js_ = (GridItemvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./src/components/GridItem.vue?vue&type=style&index=0&lang=css&
-var GridItemvue_type_style_index_0_lang_css_ = __webpack_require__("5ed4");
+// CONCATENATED MODULE: ./src/components/GridItem.vue?vue&type=script&lang=js
+ /* harmony default export */ var components_GridItemvue_type_script_lang_js = (GridItemvue_type_script_lang_js); 
+// EXTERNAL MODULE: ./src/components/GridItem.vue?vue&type=style&index=0&id=e7489122&prod&lang=css
+var GridItemvue_type_style_index_0_id_e7489122_prod_lang_css = __webpack_require__("ec0d");
 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__("2877");
@@ -12482,7 +13103,7 @@ var componentNormalizer = __webpack_require__("2877");
 /* normalize component */
 
 var component = Object(componentNormalizer["a" /* default */])(
-  components_GridItemvue_type_script_lang_js_,
+  components_GridItemvue_type_script_lang_js,
   render,
   staticRenderFns,
   false,
@@ -12496,6 +13117,82 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
+/***/ "bd86":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ _defineProperty; });
+
+// EXTERNAL MODULE: ./node_modules/core-js/library/fn/object/define-property.js
+var define_property = __webpack_require__("454f");
+var define_property_default = /*#__PURE__*/__webpack_require__.n(define_property);
+
+// EXTERNAL MODULE: ./node_modules/core-js/library/fn/symbol/index.js
+var symbol = __webpack_require__("f921");
+var symbol_default = /*#__PURE__*/__webpack_require__.n(symbol);
+
+// EXTERNAL MODULE: ./node_modules/core-js/library/fn/symbol/iterator.js
+var iterator = __webpack_require__("d8d6");
+var iterator_default = /*#__PURE__*/__webpack_require__.n(iterator);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/typeof.js
+
+
+function _typeof(o) {
+  "@babel/helpers - typeof";
+
+  return _typeof = "function" == typeof symbol_default.a && "symbol" == typeof iterator_default.a ? function (o) {
+    return typeof o;
+  } : function (o) {
+    return o && "function" == typeof symbol_default.a && o.constructor === symbol_default.a && o !== symbol_default.a.prototype ? "symbol" : typeof o;
+  }, _typeof(o);
+}
+// EXTERNAL MODULE: ./node_modules/core-js/library/fn/symbol/to-primitive.js
+var to_primitive = __webpack_require__("366e");
+var to_primitive_default = /*#__PURE__*/__webpack_require__.n(to_primitive);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/toPrimitive.js
+
+
+function _toPrimitive(input, hint) {
+  if (_typeof(input) !== "object" || input === null) return input;
+  var prim = input[to_primitive_default.a];
+  if (prim !== undefined) {
+    var res = prim.call(input, hint || "default");
+    if (_typeof(res) !== "object") return res;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return (hint === "string" ? String : Number)(input);
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/toPropertyKey.js
+
+
+function _toPropertyKey(arg) {
+  var key = _toPrimitive(arg, "string");
+  return _typeof(key) === "symbol" ? key : String(key);
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js
+
+
+function _defineProperty(obj, key, value) {
+  key = _toPropertyKey(key);
+  if (key in obj) {
+    define_property_default()(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+
+/***/ }),
+
 /***/ "be13":
 /***/ (function(module, exports) {
 
@@ -12504,6 +13201,36 @@ module.exports = function (it) {
   if (it == undefined) throw TypeError("Can't call method on  " + it);
   return it;
 };
+
+
+/***/ }),
+
+/***/ "bf0b":
+/***/ (function(module, exports, __webpack_require__) {
+
+var pIE = __webpack_require__("355d");
+var createDesc = __webpack_require__("aebd");
+var toIObject = __webpack_require__("36c3");
+var toPrimitive = __webpack_require__("1bc3");
+var has = __webpack_require__("07e3");
+var IE8_DOM_DEFINE = __webpack_require__("794b");
+var gOPD = Object.getOwnPropertyDescriptor;
+
+exports.f = __webpack_require__("8e60") ? gOPD : function getOwnPropertyDescriptor(O, P) {
+  O = toIObject(O);
+  P = toPrimitive(P, true);
+  if (IE8_DOM_DEFINE) try {
+    return gOPD(O, P);
+  } catch (e) { /* empty */ }
+  if (has(O, P)) return createDesc(!pIE.f.call(O, P), O[P]);
+};
+
+
+/***/ }),
+
+/***/ "c207":
+/***/ (function(module, exports) {
+
 
 
 /***/ }),
@@ -12679,6 +13406,62 @@ module.exports = function (IS_INCLUDES) {
       if (O[index] === el) return IS_INCLUDES || index || 0;
     } return !IS_INCLUDES && -1;
   };
+};
+
+
+/***/ }),
+
+/***/ "c367":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var addToUnscopables = __webpack_require__("8436");
+var step = __webpack_require__("50ed");
+var Iterators = __webpack_require__("481b");
+var toIObject = __webpack_require__("36c3");
+
+// 22.1.3.4 Array.prototype.entries()
+// 22.1.3.13 Array.prototype.keys()
+// 22.1.3.29 Array.prototype.values()
+// 22.1.3.30 Array.prototype[@@iterator]()
+module.exports = __webpack_require__("30f1")(Array, 'Array', function (iterated, kind) {
+  this._t = toIObject(iterated); // target
+  this._i = 0;                   // next index
+  this._k = kind;                // kind
+// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
+}, function () {
+  var O = this._t;
+  var kind = this._k;
+  var index = this._i++;
+  if (!O || index >= O.length) {
+    this._t = undefined;
+    return step(1);
+  }
+  if (kind == 'keys') return step(0, index);
+  if (kind == 'values') return step(0, O[index]);
+  return step(0, [index, O[index]]);
+}, 'values');
+
+// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
+Iterators.Arguments = Iterators.Array;
+
+addToUnscopables('keys');
+addToUnscopables('values');
+addToUnscopables('entries');
+
+
+/***/ }),
+
+/***/ "c3a1":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+var $keys = __webpack_require__("e6f3");
+var enumBugKeys = __webpack_require__("1691");
+
+module.exports = Object.keys || function keys(O) {
+  return $keys(O, enumBugKeys);
 };
 
 
@@ -13544,6 +14327,14 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "ccb9":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports.f = __webpack_require__("5168");
+
+
+/***/ }),
+
 /***/ "ce10":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13618,6 +14409,43 @@ module.exports = {
 
 /***/ }),
 
+/***/ "d864":
+/***/ (function(module, exports, __webpack_require__) {
+
+// optional / simple context binding
+var aFunction = __webpack_require__("79aa");
+module.exports = function (fn, that, length) {
+  aFunction(fn);
+  if (that === undefined) return fn;
+  switch (length) {
+    case 1: return function (a) {
+      return fn.call(that, a);
+    };
+    case 2: return function (a, b) {
+      return fn.call(that, a, b);
+    };
+    case 3: return function (a, b, c) {
+      return fn.call(that, a, b, c);
+    };
+  }
+  return function (/* ...args */) {
+    return fn.apply(that, arguments);
+  };
+};
+
+
+/***/ }),
+
+/***/ "d8d6":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("1654");
+__webpack_require__("6c1c");
+module.exports = __webpack_require__("ccb9").f('iterator');
+
+
+/***/ }),
+
 /***/ "d8e8":
 /***/ (function(module, exports) {
 
@@ -13625,6 +14453,48 @@ module.exports = function (it) {
   if (typeof it != 'function') throw TypeError(it + ' is not a function!');
   return it;
 };
+
+
+/***/ }),
+
+/***/ "d9f6":
+/***/ (function(module, exports, __webpack_require__) {
+
+var anObject = __webpack_require__("e4ae");
+var IE8_DOM_DEFINE = __webpack_require__("794b");
+var toPrimitive = __webpack_require__("1bc3");
+var dP = Object.defineProperty;
+
+exports.f = __webpack_require__("8e60") ? Object.defineProperty : function defineProperty(O, P, Attributes) {
+  anObject(O);
+  P = toPrimitive(P, true);
+  anObject(Attributes);
+  if (IE8_DOM_DEFINE) try {
+    return dP(O, P, Attributes);
+  } catch (e) { /* empty */ }
+  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
+  if ('value' in Attributes) O[P] = Attributes.value;
+  return O;
+};
+
+
+/***/ }),
+
+/***/ "dbdb":
+/***/ (function(module, exports, __webpack_require__) {
+
+var core = __webpack_require__("584a");
+var global = __webpack_require__("e53d");
+var SHARED = '__core-js_shared__';
+var store = global[SHARED] || (global[SHARED] = {});
+
+(module.exports = function (key, value) {
+  return store[key] || (store[key] = value !== undefined ? value : {});
+})('versions', []).push({
+  version: core.version,
+  mode: __webpack_require__("b8e3") ? 'pure' : 'global',
+  copyright: '© 2020 Denis Pushkarev (zloirock.ru)'
+});
 
 
 /***/ }),
@@ -13640,12 +14510,121 @@ module.exports = (
 
 /***/ }),
 
-/***/ "e279":
+/***/ "e4ae":
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__("f772");
+module.exports = function (it) {
+  if (!isObject(it)) throw TypeError(it + ' is not an object!');
+  return it;
+};
+
+
+/***/ }),
+
+/***/ "e53d":
+/***/ (function(module, exports) {
+
+// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+var global = module.exports = typeof window != 'undefined' && window.Math == Math
+  ? window : typeof self != 'undefined' && self.Math == Math ? self
+  // eslint-disable-next-line no-new-func
+  : Function('return this')();
+if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
+
+
+/***/ }),
+
+/***/ "e6f3":
+/***/ (function(module, exports, __webpack_require__) {
+
+var has = __webpack_require__("07e3");
+var toIObject = __webpack_require__("36c3");
+var arrayIndexOf = __webpack_require__("5b4e")(false);
+var IE_PROTO = __webpack_require__("5559")('IE_PROTO');
+
+module.exports = function (object, names) {
+  var O = toIObject(object);
+  var i = 0;
+  var result = [];
+  var key;
+  for (key in O) if (key != IE_PROTO) has(O, key) && result.push(key);
+  // Don't enum bug & hidden keys
+  while (names.length > i) if (has(O, key = names[i++])) {
+    ~arrayIndexOf(result, key) || result.push(key);
+  }
+  return result;
+};
+
+
+/***/ }),
+
+/***/ "ebfd":
+/***/ (function(module, exports, __webpack_require__) {
+
+var META = __webpack_require__("62a0")('meta');
+var isObject = __webpack_require__("f772");
+var has = __webpack_require__("07e3");
+var setDesc = __webpack_require__("d9f6").f;
+var id = 0;
+var isExtensible = Object.isExtensible || function () {
+  return true;
+};
+var FREEZE = !__webpack_require__("294c")(function () {
+  return isExtensible(Object.preventExtensions({}));
+});
+var setMeta = function (it) {
+  setDesc(it, META, { value: {
+    i: 'O' + ++id, // object ID
+    w: {}          // weak collections IDs
+  } });
+};
+var fastKey = function (it, create) {
+  // return primitive with prefix
+  if (!isObject(it)) return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
+  if (!has(it, META)) {
+    // can't set metadata to uncaught frozen object
+    if (!isExtensible(it)) return 'F';
+    // not necessary to add metadata
+    if (!create) return 'E';
+    // add missing metadata
+    setMeta(it);
+  // return object ID
+  } return it[META].i;
+};
+var getWeak = function (it, create) {
+  if (!has(it, META)) {
+    // can't set metadata to uncaught frozen object
+    if (!isExtensible(it)) return true;
+    // not necessary to add metadata
+    if (!create) return false;
+    // add missing metadata
+    setMeta(it);
+  // return hash weak collections IDs
+  } return it[META].w;
+};
+// add metadata on freeze-family methods calling
+var onFreeze = function (it) {
+  if (FREEZE && meta.NEED && isExtensible(it) && !has(it, META)) setMeta(it);
+  return it;
+};
+var meta = module.exports = {
+  KEY: META,
+  NEED: false,
+  fastKey: fastKey,
+  getWeak: getWeak,
+  onFreeze: onFreeze
+};
+
+
+/***/ }),
+
+/***/ "ec0d":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GridLayout_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("1156");
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GridLayout_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GridLayout_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GridItem_vue_vue_type_style_index_0_id_e7489122_prod_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("4e24");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GridItem_vue_vue_type_style_index_0_id_e7489122_prod_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GridItem_vue_vue_type_style_index_0_id_e7489122_prod_lang_css__WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
 
 
@@ -14046,13 +15025,24 @@ module.exports = function (object, index, value) {
 
 /***/ }),
 
-/***/ "f751":
+/***/ "f772":
+/***/ (function(module, exports) {
+
+module.exports = function (it) {
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
+};
+
+
+/***/ }),
+
+/***/ "f921":
 /***/ (function(module, exports, __webpack_require__) {
 
-// 19.1.3.1 Object.assign(target, source)
-var $export = __webpack_require__("5ca1");
-
-$export($export.S + $export.F, 'Object', { assign: __webpack_require__("7333") });
+__webpack_require__("014b");
+__webpack_require__("c207");
+__webpack_require__("69d3");
+__webpack_require__("765d");
+module.exports = __webpack_require__("584a").Symbol;
 
 
 /***/ }),
@@ -14115,6 +15105,17 @@ var components = __webpack_require__("2af9");
 
 /***/ }),
 
+/***/ "fbff":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GridLayout_vue_vue_type_style_index_0_id_73ba11da_prod_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("4458");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GridLayout_vue_vue_type_style_index_0_id_73ba11da_prod_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GridLayout_vue_vue_type_style_index_0_id_73ba11da_prod_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
+
+/***/ }),
+
 /***/ "fca0":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14141,5 +15142,4 @@ module.exports = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u20
 /***/ })
 
 /******/ })["default"];
-});
-//# sourceMappingURL=vue-grid-layout.umd.js.map
+//# sourceMappingURL=vue-grid-layout-sa.common.js.map
