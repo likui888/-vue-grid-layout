@@ -1,6 +1,6 @@
 {
-  "name": "vue-grid-layout-sa",
-  "version": "1.0.0",
+  "name": "vue-grid-layout-satd",
+  "version": "1.0.2",
   "description": "A draggable and resizable grid layout, as a Vue component.",
   "keywords": [
     "grid",
@@ -18,8 +18,8 @@
   },
   "author": "Gustavo Santos (JBay Solutions) <gustavo.santos@jbaysolutions.com> (http://www.jbaysolutions.com)",
   "homepage": "https://github.com/jbaysolutions/vue-grid-layout",
-  "main": "dist/vue-grid-layout.common.js",
-  "unpkg": "dist/vue-grid-layout.umd.min.js",
+  "main": "dist/vue-grid-layout-satd.common.js",
+  "unpkg": "dist/vue-grid-layout-satd.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "rimraf dist && vue-cli-service build",
